@@ -9,14 +9,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWorkout_list"
-        android:layout_width="405dp"
-        android:layout_height="660dp"
+        android:layout_width="395dp"
+        android:layout_height="594dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:scrollbarSize="6dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAtzera"
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_media_rew"
-        tools:layout_editor_absoluteX="339dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="7dp" />
 
     <TextView
@@ -41,4 +42,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <TextView
+        android:id="@+id/tvWorkoutsKopurua"
+        android:layout_width="176dp"
+        android:layout_height="32dp"
+        android:text="@string/txt_lblWorkoutKopurua"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089" />
+
+    <TextView
+        android:id="@+id/tvIzena_header"
+        android:layout_width="99dp"
+        android:layout_height="30dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <TextView
+        android:id="@+id/tvIzena_header2"
+        android:layout_width="99dp"
+        android:layout_height="30dp"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <TextView
+        android:id="@+id/tvIzena_header3"
+        android:layout_width="99dp"
+        android:layout_height="30dp"
+        tools:layout_editor_absoluteX="300dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_menu_myplaces"
+        tools:layout_editor_absoluteX="345dp"
+        tools:layout_editor_absoluteY="5dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

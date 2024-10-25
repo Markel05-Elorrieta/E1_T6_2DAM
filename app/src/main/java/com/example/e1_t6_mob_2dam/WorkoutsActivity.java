@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +57,9 @@ public class WorkoutsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
+        workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
 
 /*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

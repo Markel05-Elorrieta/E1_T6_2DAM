@@ -15,7 +15,7 @@
     <string name="txt_lblDate">Jaiotze-data</string>
     <string name="txt_btnAtzera">Atzera</string>
     <string name="txt_lblWorkoutInfo_Header">WORKOUT INFORMAZIOA</string>
-
-    <string name="txt_btnHasi">Hasi!</string>
+    <string name="txt_lblWorkoutKopurua"> </string>
+    <string name="txt_btnHasi">HASI</string>
 
 </resources>
