@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -31,23 +32,24 @@ public class WorkoutsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        RecyclerView rv = findViewById(R.id.rvWorkout_list);
-        AdapterWorkoutList a = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(a);
-
-        FloatingActionButton btnProfile = (FloatingActionButton) findViewById(R.id.profileButton);
-        Bitmap icon = GlobalVariables.logedUser.getBitmap();
-        btnProfile.setImageBitmap(icon);
-        btnProfile.setOnClickListener(new View.OnClickListener() {
+        ImageButton imageButton = findViewById(R.id.imageButton);
+        imageButton.setImageBitmap(GlobalVariables.logedUser.getBitmap());
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(WorkoutsActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+        TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
+        workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
+
+        RecyclerView rv = findViewById(R.id.rvWorkout_list);
+        AdapterWorkoutList a = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(a);
 
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
         atzeraButton.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +63,6 @@ public class WorkoutsActivity extends AppCompatActivity {
             }
         });
 
-        TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
-        workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
 
-        Log.d("photo", GlobalVariables.logedUser.getimgBase64());
     }
 }
