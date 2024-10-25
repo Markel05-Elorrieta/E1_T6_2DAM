@@ -76,10 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                              darle a un workout bajar las ariketas (como relacionar en BD para poder bajar bien las cosas)**/
                             workoutDao.getWorkouts(new WorkoutCallBack() {
                                 @Override
-                                public void onWorkoutsRetrieved(ArrayList<Workout> workouts) {
+                                public void onWorkoutsRetrieved(ArrayList<Workout> workoutsDB) {
+                                    GlobalVariables.workoutsDB = workoutsDB;
                                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                                     startActivity(intent);
-                                    finish(); // Optional: Call finish() if you want to close LoginActivity
+                                    finish();
                                 }
                             });
                         } catch (ErrorWrongPassword | UserNotFound error) {

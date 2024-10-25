@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class WorkoutInfoActivity extends AppCompatActivity {
+    private Functions functions = new Functions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +28,19 @@ public class WorkoutInfoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         TextView txtWorkoutName = (TextView) findViewById(R.id.tvWorkoutName);
+        txtWorkoutName.setText(GlobalVariables.currentWorkout.getIzena());
         TextView txtWorkoutMaila = (TextView) findViewById(R.id.tvWorkoutMaila);
+        txtWorkoutMaila.setText("Maila: " + GlobalVariables.currentWorkout.getMaila());
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        Functions functions = new Functions();
-        Button btnAtzera = (Button) findViewById(R.id.btnWorkoutInfo_back);
 
         WebView webView = findViewById(R.id.web);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.loadUrl(GlobalVariables.currentWorkout.getVideoURL());
 
+        Button btnAtzera = (Button) findViewById(R.id.btnWorkoutInfo_back);
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,8 +51,7 @@ public class WorkoutInfoActivity extends AppCompatActivity {
             }
         });
 
-        txtWorkoutName.setText(GlobalVariables.currentWorkout.getIzena());
-        txtWorkoutMaila.setText("Maila: " + GlobalVariables.currentWorkout.getMaila());
+
 
 
     }

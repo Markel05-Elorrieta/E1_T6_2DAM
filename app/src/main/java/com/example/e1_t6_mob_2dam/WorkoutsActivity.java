@@ -39,9 +39,12 @@ public class WorkoutsActivity extends AppCompatActivity {
             return insets;
         });
 
-
-
         RecyclerView rv = findViewById(R.id.rvWorkout_list);
+        AdapterWorkoutList a = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(a);
+
+
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
         atzeraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +56,9 @@ public class WorkoutsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        Log.d("AriketakCount", GlobalVariables.workoutsDB.toString());
-        AdapterWorkoutList a = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        // Attach the adapter to the RecyclerView
-        rv.setAdapter(a);
+
 /*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         builder.setTitle("Login txarto");
         builder.setMessage(GlobalVariables.logedUser.getErabiltzailea() + ";" +GlobalVariables.logedUser.getMaila());
         builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {

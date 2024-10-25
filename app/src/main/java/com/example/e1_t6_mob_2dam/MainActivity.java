@@ -58,16 +58,14 @@ public class MainActivity extends AppCompatActivity {
         */
         /*************/
 
-            if (!cacheUserExist) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
-
+        if (!cacheUserExist) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

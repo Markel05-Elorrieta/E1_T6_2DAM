@@ -18,17 +18,16 @@ public class WorkoutDao {
 
     public void getWorkouts(WorkoutCallBack callback) { // Accepting a callback
         FirebaseFirestore db = conectionDB.getConnection();
+
         db.collection("workouts").get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 ArrayList<Workout> workoutsDB = new ArrayList<>();
                 AtomicInteger completedTasks = new AtomicInteger(0);
-                int totalTasks = task.getResult().size(); // Total number of workout documents
+                int totalTasks = task.getResult().size();
 
                 if (totalTasks == 0) {
-                    // No workouts found, notify the callback
                     Log.d("WorkoutDao", "No workouts found.");
-                    GlobalVariables.workoutsDB = workoutsDB; // Set as empty list
-                    callback.onWorkoutsRetrieved(workoutsDB); // Notify with empty list
+                    callback.onWorkoutsRetrieved(workoutsDB);
                     return;
                 }
 
@@ -44,7 +43,6 @@ public class WorkoutDao {
                                         workout.setVideoURL(document.getString("video_url"));
                                         workout.setAriketaCount(ariketakTask.getResult().size());
                                         workoutsDB.add(workout);
-                                        Log.d("AriketakCount", workout.toString());
                                     }
                                 } else {
                                     Log.d("AriketaError", "Error getting ariketas: ", ariketakTask.getException());
@@ -52,8 +50,6 @@ public class WorkoutDao {
 
                                 // Increment the counter and check if all tasks are complete
                                 if (completedTasks.incrementAndGet() == totalTasks) {
-                                    GlobalVariables.workoutsDB = workoutsDB; // Set the workoutsDB
-                                    Log.d("DBFinish", "Finished retrieving workouts: " + workoutsDB.size());
                                     callback.onWorkoutsRetrieved(workoutsDB); // Notify callback with the workouts
                                 }
                             });
