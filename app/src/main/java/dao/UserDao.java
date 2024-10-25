@@ -35,7 +35,8 @@ public class UserDao {
                                 document.getDate("jaiotze_data"),
                                 document.getString("email"),
                                 document.getDouble("telefonoa").intValue(),
-                                document.getDouble("maila").intValue()
+                                document.getDouble("maila").intValue(),
+                                document.getString("argazkia")
                         );
                         userCallBack.userRetrieved(userDB);
                         break;

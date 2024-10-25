@@ -247,6 +247,7 @@
         android:clickable="true"
         app:srcCompat="?attr/actionModeCloseDrawable"
         tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="17dp" />
+        tools:layout_editor_absoluteY="17dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

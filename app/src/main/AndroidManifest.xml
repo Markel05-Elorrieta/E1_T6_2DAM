@@ -13,6 +13,9 @@
         android:theme="@style/Theme.E1_T6_MOB_2DAM"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".WorkoutInfoActivity"
             android:exported="false" />
         <activity

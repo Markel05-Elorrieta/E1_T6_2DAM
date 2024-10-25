@@ -1,14 +1,10 @@
 package com.example.e1_t6_mob_2dam;
 
-import static com.example.e1_t6_mob_2dam.R.id.btnAtzera;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -21,11 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
-import dao.WorkoutDao;
 import objects.User;
-import objects.Workout;
 
 public class WorkoutsActivity extends AppCompatActivity {
 
@@ -45,6 +37,17 @@ public class WorkoutsActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(a);
 
+        FloatingActionButton btnProfile = (FloatingActionButton) findViewById(R.id.profileButton);
+        Bitmap icon = GlobalVariables.logedUser.getBitmap();
+        btnProfile.setImageBitmap(icon);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WorkoutsActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
         atzeraButton.setOnClickListener(new View.OnClickListener() {
@@ -61,17 +64,6 @@ public class WorkoutsActivity extends AppCompatActivity {
         TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
         workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
 
-/*
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Login txarto");
-        builder.setMessage(GlobalVariables.logedUser.getErabiltzailea() + ";" +GlobalVariables.logedUser.getMaila());
-        builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();*/
+        Log.d("photo", GlobalVariables.logedUser.getimgBase64());
     }
 }
