@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWorkout_list"
-        android:layout_width="395dp"
-        android:layout_height="594dp"
+        android:layout_width="402dp"
+        android:layout_height="567dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:scrollbarSize="6dp"
@@ -26,7 +26,8 @@
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_media_rew"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp" />
+        tools:layout_editor_absoluteY="7dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
@@ -52,31 +53,48 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.085" />
 
     <TextView
-        android:id="@+id/tvIzena_header"
-        android:layout_width="99dp"
-        android:layout_height="30dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:id="@+id/tabl1"
+        android:layout_width="85dp"
+        android:layout_height="20dp"
+        android:text="@string/txt_columnName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.196" />
 
     <TextView
-        android:id="@+id/tvIzena_header2"
-        android:layout_width="99dp"
-        android:layout_height="30dp"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:id="@+id/tvWorkout_columnCop"
+        android:layout_width="117dp"
+        android:layout_height="23dp"
+        android:text="@string/txt_columnCop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.193" />
 
     <TextView
-        android:id="@+id/tvIzena_header3"
-        android:layout_width="99dp"
-        android:layout_height="30dp"
-        tools:layout_editor_absoluteX="300dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:id="@+id/tvWorkout_columnLevel"
+        android:layout_width="80dp"
+        android:layout_height="21dp"
+        android:text="@string/txt_columnLvl"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.194" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/profileButton"
