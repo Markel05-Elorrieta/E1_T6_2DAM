@@ -32,32 +32,25 @@ public class WorkoutDao {
                 }
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    // For each workout document, fetch the associated exercises
-                    db.collection("workouts").document(document.getId()).collection("ariketak").get()
-                            .addOnCompleteListener(ariketakTask -> {
-                                if (ariketakTask.isSuccessful()) {
-                                    if (document.getDouble("maila") <= GlobalVariables.logedUser.getMaila()) {
-                                        Workout workout = new Workout();
-                                        workout.setIzena(document.getString("izena"));
-                                        workout.setMaila(document.getDouble("maila").intValue());
-                                        workout.setVideoURL(document.getString("video_url"));
-                                        workout.setAriketaCount(ariketakTask.getResult().size());
-                                        workoutsDB.add(workout);
-                                    }
-                                } else {
-                                    Log.d("AriketaError", "Error getting ariketas: ", ariketakTask.getException());
-                                }
+                    if (document.getDouble("maila") <= GlobalVariables.logedUser.getMaila()) {
+                        Workout workout = new Workout();
+                        workout.setIzena(document.getString("izena"));
+                        workout.setMaila(document.getDouble("maila").intValue());
+                        workout.setVideoURL(document.getString("video_url"));
+                        ArrayList<String> idList = (ArrayList<String>) document.get("ariketasID");
+                        workout.setAriketakId(idList);
+                        workoutsDB.add(workout);
+                    }
 
-                                // Increment the counter and check if all tasks are complete
-                                if (completedTasks.incrementAndGet() == totalTasks) {
-                                    callback.onWorkoutsRetrieved(workoutsDB); // Notify callback with the workouts
-                                }
-                            });
+                    if (completedTasks.incrementAndGet() == totalTasks) {
+                        callback.onWorkoutsRetrieved(workoutsDB);
+                    }
                 }
             } else {
                 Log.d("DBError", "Error getting workouts: ", task.getException());
-                callback.onWorkoutsRetrieved(null); // Notify with null on error
+                callback.onWorkoutsRetrieved(null);
             }
         });
     }
+
 }

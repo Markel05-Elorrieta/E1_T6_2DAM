@@ -52,7 +52,7 @@ public class AdapterWorkoutList extends RecyclerView.Adapter<AdapterWorkoutList.
 
         // Set the values for each TextView
         holder.tvName.setText(currentWorkout.getIzena());
-        holder.tvNumAriketak.setText(String.valueOf(currentWorkout.getAriketaCount()));  // Number of exercises
+        holder.tvNumAriketak.setText(String.valueOf(currentWorkout.getAriketakId().size()));  // Number of exercises
         holder.tvMaila.setText(String.valueOf(currentWorkout.getMaila()));  // Difficulty level
 
         // Set click listener for the item

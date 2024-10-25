@@ -72,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             *********************/
 
-                            /** Plantear BD con ariketak, bajar workout y ariketas a la vez o bajar primero workout para mostrar, y luego al
-                             darle a un workout bajar las ariketas (como relacionar en BD para poder bajar bien las cosas)**/
                             workoutDao.getWorkouts(new WorkoutCallBack() {
                                 @Override
                                 public void onWorkoutsRetrieved(ArrayList<Workout> workoutsDB) {

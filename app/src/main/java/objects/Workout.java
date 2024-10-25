@@ -6,16 +6,16 @@ public class Workout {
     private String izena;
     private int maila;
     private String videoURL;
-    private int ariketaCount;
+    private ArrayList<String> ariketakId;
 
     public Workout() {
     }
 
-    public Workout(String izena, int maila, String videoURL, int ariketaCount) {
+    public Workout(String izena, int maila, String videoURL, ArrayList<String> ariketakId) {
         this.izena = izena;
-        this.videoURL = videoURL;
         this.maila = maila;
-        this.ariketaCount = ariketaCount;
+        this.videoURL = videoURL;
+        this.ariketakId = ariketakId;
     }
 
     public String getIzena() {
@@ -42,12 +42,12 @@ public class Workout {
         this.maila = maila;
     }
 
-    public int getAriketaCount() {
-        return ariketaCount;
+    public ArrayList<String> getAriketakId() {
+        return ariketakId;
     }
 
-    public void setAriketaCount(int ariketaCount) {
-        this.ariketaCount = ariketaCount;
+    public void setAriketakId(ArrayList<String> ariketakId) {
+        this.ariketakId = ariketakId;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Workout {
                 "izena='" + izena + '\'' +
                 ", maila=" + maila +
                 ", videoURL='" + videoURL + '\'' +
-                ", ariketaAriketa=" + ariketaCount +
+                ", ariketakId=" + ariketakId +
                 '}';
     }
 }
