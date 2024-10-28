@@ -1,8 +1,10 @@
 package com.example.e1_t6_mob_2dam;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -25,21 +27,32 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Functions functions = new Functions();
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         EditText nameIn = (EditText) findViewById(R.id.etProfile_Name);
         EditText surnameIn = (EditText) findViewById(R.id.etProfile_surname);
         EditText dateIn = (EditText) findViewById(R.id.etProfile_date);
         EditText emailIn = (EditText) findViewById(R.id.etProfile_email);
-        EditText phoneIn = (EditText) findViewById(R.id.etProfile_phone);
+        //EditText phoneIn = (EditText) findViewById(R.id.etProfile_phone);
+        Button btnPwd = (Button) findViewById(R.id.btnProfile_changePassword);
+        FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
 
         nameIn.setText(GlobalVariables.logedUser.getIzena());
         surnameIn.setText(GlobalVariables.logedUser.getAbizenak());
-        //nameIn.setText(GlobalVariables.logedUser.getJaiotze_data().);
+        dateIn.setText(GlobalVariables.logedUser.getJaiotze_data().getDay() + "/" +
+                GlobalVariables.logedUser.getJaiotze_data().getMonth() + "/"
+                + (GlobalVariables.logedUser.getJaiotze_data().getYear()+1900));
         emailIn.setText(GlobalVariables.logedUser.getEmail());
         //phoneIn.setText(GlobalVariables.logedUser.getTelefonoa());
 
+        btnPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                functions.mostrarDialogoConDosEditText(ProfileActivity.this);
+            }
+        });
 
-        FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

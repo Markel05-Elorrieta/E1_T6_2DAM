@@ -1,8 +1,14 @@
 package com.example.e1_t6_mob_2dam;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,6 +29,7 @@ import objects.User;
 public class Functions {
     public static ArrayList<User> users = new ArrayList<>();
     private ConectionDB conectionDB = new ConectionDB();
+    private UserDao userDao = new UserDao();
     private User user;
 
     public void checkLogin(User userDB, String passwordIn) throws ErrorWrongPassword, UserNotFound {
@@ -89,4 +96,79 @@ public class Functions {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void mostrarDialogoConDosEditText(Context context) {
+        // Crear el AlertDialog Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Ingrese los datos");
+
+        // Crear un LinearLayout para contener los EditText
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(50, 40, 50, 10); // Ajusta el padding si deseas espaciar el contenido
+
+        // Crear el primer EditText
+        final EditText input1 = new EditText(context);
+        input1.setHint("Primer dato"); // Hint para el primer campo de texto
+        layout.addView(input1); // Agregar el primer EditText al layout
+
+        // Crear el segundo EditText
+        final EditText input2 = new EditText(context);
+        input2.setHint("Segundo dato"); // Hint para el segundo campo de texto
+        layout.addView(input2); // Agregar el segundo EditText al layout
+
+        // TextView para mostrar el mensaje de error
+        final TextView errorTextView = new TextView(context);
+        errorTextView.setText(""); // Inicialmente vacío
+        errorTextView.setTextColor(Color.RED); // Color para el texto de error
+        layout.addView(errorTextView); // Agregar el TextView al layout
+
+        // Configurar el layout en el AlertDialog
+        builder.setView(layout);
+
+        // Configurar los botones
+        builder.setPositiveButton("Aceptar", null); // Usar null para evitar el cierre automático
+
+        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
+
+        // Crear el AlertDialog
+        AlertDialog dialog = builder.create();
+
+        // Establecer un listener para el botón "Aceptar"
+        dialog.setOnShowListener(dialogInterface -> {
+            Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setOnClickListener(v -> {
+                // Obtener los valores ingresados en los EditTexts
+                String textoIngresado1 = input1.getText().toString();
+                String textoIngresado2 = input2.getText().toString();
+
+                // Limpiar el mensaje de error
+                errorTextView.setText("");
+
+                // Validar los datos
+                if (!textoIngresado1.equals(textoIngresado2)) {
+                    errorTextView.setText("Las contraseñas no coinciden.");
+                    errorTextView.requestLayout(); // Forzar la actualización de la vista
+                } else if (BCrypt.checkpw(textoIngresado1, GlobalVariables.logedUser.getPasahitza())) {
+                    errorTextView.setText("La nueva contraseña no puede ser igual a la actual.");
+                    errorTextView.requestLayout(); // Forzar la actualización de la vista
+                } else {
+                    // Actualizar la contraseña en la base de datos
+                    errorTextView.setText("Se cambio la contraseña correctamente");
+                    errorTextView.setTextColor(Color.GREEN);
+                    errorTextView.requestLayout();
+
+                    userDao.updatePwd(textoIngresado1);
+
+                    dialog.dismiss(); // Cerrar el diálogo si la contraseña se actualiza
+
+                }
+            });
+        });
+        // Mostrar el diálogo
+        dialog.show();// O devuelve un valor adecuado según tu lógica
+    }
+
+
+
 }

@@ -8,6 +8,8 @@ import CallBacks.UserCallBack;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,7 +29,7 @@ public class UserDao {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     if (document.getString("erabiltzailea").equals(userIn)){
                         User userDB = new User(
-                                completedTasks.get(),
+                                document.getId(),
                                 document.getString("izena"),
                                 document.getString("abizenak"),
                                 document.getString("erabiltzailea"),
@@ -51,5 +53,17 @@ public class UserDao {
                 userCallBack.userRetrieved(userDB);
             }
         });
+    }
+
+    public void updatePwd(String newPdw) {
+        FirebaseFirestore db = conectionDB.getConnection();
+        db.collection("erabiltzaileak").document(GlobalVariables.logedUser.getId())
+                .update("pasahitza", BCrypt.hashpw(newPdw, BCrypt.gensalt()))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Firestore", "DocumentSnapshot successfully updated!");
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("Firestore", "Error updating document", e);
+                });
     }
 }
