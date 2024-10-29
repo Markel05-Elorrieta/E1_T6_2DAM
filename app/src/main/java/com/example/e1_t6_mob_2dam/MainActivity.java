@@ -38,34 +38,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Boolean cacheUserExist = false;
-        Cache cache = new Cache();
-
-        /**********CACHE*******/
-        /*
-        try {
-            String userCache = cache.get("rememberUser");
-            Log.d("entro", userCache);
-            for (int i = 0; i < usersList.size(); i++) {
-                if (usersList.get(i).getErabiltzailea().equals(userCache)) {
-                    GlobalVariables.logedUser = usersList.get(i);
-                    cacheUserExist = true;
-                }
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        */
-        /*************/
-
-        if (!cacheUserExist) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

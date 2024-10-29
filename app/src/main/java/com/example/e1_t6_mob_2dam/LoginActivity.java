@@ -30,7 +30,6 @@ import objects.Workout;
 
 
 public class LoginActivity extends AppCompatActivity {
-
     private Functions functions = new Functions();
     private UserDao userDao = new UserDao();
     private WorkoutDao workoutDao = new WorkoutDao();
@@ -57,20 +56,12 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
                     @Override
                     public void userRetrieved(User userOut) {
                         try {
                             functions.checkLogin(userOut, passwordIn.getText().toString());
-
-                            /** CACHE **/
-                            /** Falta guardar el usuario entero en el cache **/
-                            /*********************
-                            if (rememberIn.isChecked()){
-                                Log.d("entro", "entro");
-                                cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
-                            }
-                            *********************/
 
                             workoutDao.getWorkouts(new WorkoutCallBack() {
                                 @Override

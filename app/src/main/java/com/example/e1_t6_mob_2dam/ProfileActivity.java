@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         EditText surnameIn = (EditText) findViewById(R.id.etProfile_surname);
         EditText dateIn = (EditText) findViewById(R.id.etProfile_date);
         EditText emailIn = (EditText) findViewById(R.id.etProfile_email);
-        //EditText phoneIn = (EditText) findViewById(R.id.etProfile_phone);
+        EditText phoneIn = (EditText) findViewById(R.id.etProfile_phone);
         Button btnPwd = (Button) findViewById(R.id.btnProfile_changePassword);
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
 
@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
                 GlobalVariables.logedUser.getJaiotze_data().getMonth() + "/"
                 + (GlobalVariables.logedUser.getJaiotze_data().getYear()+1900));
         emailIn.setText(GlobalVariables.logedUser.getEmail());
-        //phoneIn.setText(GlobalVariables.logedUser.getTelefonoa());
+        phoneIn.setText(GlobalVariables.logedUser.getTelefonoa() +"");
 
         btnPwd.setOnClickListener(new View.OnClickListener() {
             @Override

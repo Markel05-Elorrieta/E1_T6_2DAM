@@ -105,6 +105,8 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                 } catch (NullField nullField) {
                     functions.alertDisplay(builder, "Erregistro txarto", nullField.getMessage(), "Berriro sahiatu");
+                } catch (NumberFormatException numberFormatException) {
+                    functions.alertDisplay(builder, "Erregistro txarto", "Telefonoa ez dago ondo jarrita" , "Berriro sahiatu");
                 }
 
             }
