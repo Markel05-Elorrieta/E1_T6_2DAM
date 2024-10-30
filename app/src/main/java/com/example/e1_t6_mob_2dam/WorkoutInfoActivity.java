@@ -29,30 +29,41 @@ public class WorkoutInfoActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Builder to do the AlertDialogs
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Get object from view
         TextView txtWorkoutName = (TextView) findViewById(R.id.tvWorkoutName);
         txtWorkoutName.setText(GlobalVariables.currentWorkout.getIzena());
         TextView txtWorkoutMaila = (TextView) findViewById(R.id.tvWorkoutMaila);
         txtWorkoutMaila.setText("Maila: " + GlobalVariables.currentWorkout.getMaila());
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        WebView webView = findViewById(R.id.web);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl(GlobalVariables.currentWorkout.getVideoURL());
-
+        WebView wbYoutubeVideo = findViewById(R.id.web);
         Button btnAtzera = (Button) findViewById(R.id.btnWorkoutInfo_back);
+
+        // Settings for the webview
+        WebSettings webSettings = wbYoutubeVideo.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        wbYoutubeVideo.loadUrl(GlobalVariables.currentWorkout.getVideoURL());
+
+        // Listener of the Atzera
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Go to Workouts
                 Intent intent = new Intent(WorkoutInfoActivity.this, WorkoutsActivity.class);
                 startActivity(intent);
                 finish();
 
             }
         });
+    }
 
-
-
-
+    // If u push in your mobile back, go to previus Activity
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(WorkoutInfoActivity.this, WorkoutsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

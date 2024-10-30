@@ -27,15 +27,8 @@ import exceptions.UserAlreadyExists;
 import objects.User;
 
 public class RegisterActivity extends AppCompatActivity {
+    Functions functions = new Functions();
     private UserDao userDao = new UserDao();
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +41,10 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
-        Functions functions = new Functions();
+        // Builder to do the AlertDialogs
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        // Get object from view
         EditText nameIn = (EditText) findViewById(R.id.ptRegister_name);
         EditText surnameIn = (EditText) findViewById(R.id.ptRegister_surname);
         EditText userIn = (EditText) findViewById(R.id.ptRegister_user);
@@ -58,13 +53,14 @@ public class RegisterActivity extends AppCompatActivity {
         EditText dateIn = (EditText) findViewById(R.id.dtRegister_date);
         EditText emailIn = (EditText) findViewById(R.id.etRegister_email);
         EditText phoneIn = (EditText) findViewById(R.id.ptRegister_phone);
-        Button btnRegister = (Button) findViewById(R.id.btnRegister_register);
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnRegister_atzera);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Button btnRegister = (Button) findViewById(R.id.btnRegister_register);
 
+        // Listener of the register button
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get the text that user put
                 String txtName = nameIn.getText().toString();
                 String txtSurname = surnameIn.getText().toString();
                 String txtUser = userIn.getText().toString();
@@ -75,43 +71,51 @@ public class RegisterActivity extends AppCompatActivity {
                 String txtPhone = phoneIn.getText().toString();
 
                 try {
+                    // Check if is a field empty
                     if (txtName.equals("") || txtSurname.equals("") ||txtUser.equals("") || txtPassword.equals("") ||
                             txtPassword2.equals("") || txtDate.equals("") ||txtEmail.equals("") || txtPhone.equals("")){
                         throw new NullField();
                     }
 
+                    // Call DB to search the user
                     userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
                         @Override
                         public void userRetrieved(User userOut) {
+                            // When u get the user from DB do this
                             try {
+                                // Check if u can register with the info user provide
                                 functions.checkRegister(userOut, passwordIn.getText().toString(),password2In.getText().toString());
 
+                                // If is here is because the info is correct and can register
+                                // Create an user to insert in DB
                                 Date d = new Date(txtDate);
                                 User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
                                 functions.insertNewUser(userNew);
 
+                                // All done, show Alert saying is register
                                 functions.alertDisplayWithListener(builder, "Erregistro ondo", "Erabiltzailea ondo sortu da!", "Hurrengoa", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        // When u say continue, Go to LoginActivity
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
                                 });
                             } catch (PasswordDoNotMatch | UserAlreadyExists error) {
+                                // Alert display for errors
                                 functions.alertDisplay(builder, "Erregistro txarto", error.getMessage(), "Berriro sahiatu");
                             }
                         }
                     });
-                } catch (NullField nullField) {
-                    functions.alertDisplay(builder, "Erregistro txarto", nullField.getMessage(), "Berriro sahiatu");
-                } catch (NumberFormatException numberFormatException) {
-                    functions.alertDisplay(builder, "Erregistro txarto", "Telefonoa ez dago ondo jarrita" , "Berriro sahiatu");
+                } catch (NullField |  NumberFormatException error) {
+                    // Alert display for errors
+                    functions.alertDisplay(builder, "Erregistro txarto", error.getMessage(), "Berriro sahiatu");
                 }
-
             }
         });
 
+        // Listener of the atzera
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,5 +124,14 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    // If u push in your mobile back, go to previus Activity
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

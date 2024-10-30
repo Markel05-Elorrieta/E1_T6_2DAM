@@ -1,5 +1,8 @@
 package com.example.e1_t6_mob_2dam;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -21,6 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import objects.User;
 
 public class WorkoutsActivity extends AppCompatActivity {
+    private Functions functions = new Functions();
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,31 +37,62 @@ public class WorkoutsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton imageButton = findViewById(R.id.imageButton);
-        imageButton.setImageBitmap(GlobalVariables.logedUser.getBitmap());
-        imageButton.setOnClickListener(new View.OnClickListener() {
+
+        // Builder to do the AlertDialogs
+        builder = new AlertDialog.Builder(this);
+
+        // Get object from view
+        TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
+        ImageButton btnImageProfile = findViewById(R.id.imageButton);
+        RecyclerView rvWorkoutList = findViewById(R.id.rvWorkout_list);
+        FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
+
+        // Set nombre of workouts in the text
+        workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
+
+        // Set img of the user in the button
+        btnImageProfile.setImageBitmap(GlobalVariables.logedUser.getBitmap());
+        btnImageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Go to Profile
                 Intent intent = new Intent(WorkoutsActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
-        workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
+        // Set the table (Adapter) in the ReciclerView (The listener of each workout is insede)
+        AdapterWorkoutList adapterWorkoutList = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
+        rvWorkoutList.setLayoutManager(new LinearLayoutManager(this));
+        rvWorkoutList.setAdapter(adapterWorkoutList);
 
-        RecyclerView rv = findViewById(R.id.rvWorkout_list);
-        AdapterWorkoutList a = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(a);
-
-        FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
+        // Listener of the atzera
         atzeraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GlobalVariables.logedUser = new User();
+                functions.alertDisplayWithListener(builder, "Comprobaketa", "Saioa itxiko da, seguro atera nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // When u say continue, Go to LoginActivity
+                        Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            }
+        });
+    }
 
+    // If u push in your mobile back, go to previus Activity
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        functions.alertDisplayWithListener(builder, "Comprobaketa", "Saioa itxiko da, seguro atera nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // When u say continue, Go to LoginActivity
                 Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

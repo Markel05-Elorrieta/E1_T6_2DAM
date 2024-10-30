@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileActivity extends AppCompatActivity {
+    private Functions functions = new Functions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,35 +28,59 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Functions functions = new Functions();
 
+        // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        EditText nameIn = (EditText) findViewById(R.id.etProfile_Name);
-        EditText surnameIn = (EditText) findViewById(R.id.etProfile_surname);
-        EditText dateIn = (EditText) findViewById(R.id.etProfile_date);
-        EditText emailIn = (EditText) findViewById(R.id.etProfile_email);
-        EditText phoneIn = (EditText) findViewById(R.id.etProfile_phone);
+
+        // Get object from view
+        EditText etNameIn = (EditText) findViewById(R.id.etProfile_Name);
+        EditText etSurnameIn = (EditText) findViewById(R.id.etProfile_surname);
         Button btnPwd = (Button) findViewById(R.id.btnProfile_changePassword);
+        EditText etDateIn = (EditText) findViewById(R.id.etProfile_date);
+        EditText etEmailIn = (EditText) findViewById(R.id.etProfile_email);
+        EditText etPhoneIn = (EditText) findViewById(R.id.etProfile_phone);
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
+        Button btnGorde = (Button) findViewById(R.id.etProfile_gorde);
 
-        nameIn.setText(GlobalVariables.logedUser.getIzena());
-        surnameIn.setText(GlobalVariables.logedUser.getAbizenak());
-        dateIn.setText(GlobalVariables.logedUser.getJaiotze_data().getDay() + "/" +
+        // Write in the EditTexts the actual data
+        etNameIn.setText(GlobalVariables.logedUser.getIzena());
+        etSurnameIn.setText(GlobalVariables.logedUser.getAbizenak());
+        String dateString = GlobalVariables.logedUser.getJaiotze_data().getDay() + "/" +
                 GlobalVariables.logedUser.getJaiotze_data().getMonth() + "/"
-                + (GlobalVariables.logedUser.getJaiotze_data().getYear()+1900));
-        emailIn.setText(GlobalVariables.logedUser.getEmail());
-        phoneIn.setText(GlobalVariables.logedUser.getTelefonoa() +"");
+                + (GlobalVariables.logedUser.getJaiotze_data().getYear()+1900);
+        etDateIn.setText(dateString);
+        etEmailIn.setText(GlobalVariables.logedUser.getEmail());
+        etPhoneIn.setText(GlobalVariables.logedUser.getTelefonoa() +"");
 
+        // Listener of the button to change the password
         btnPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // AlertDialog to change password
                 functions.mostrarDialogoConDosEditText(ProfileActivity.this);
             }
         });
 
+        btnGorde.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nameIn = etNameIn.getText().toString();
+                String surnameIn = etSurnameIn.getText().toString();
+                String dateIn = etDateIn.getText().toString();
+                String emailIn = etEmailIn.getText().toString();
+                String phoneIn = etPhoneIn.getText().toString();
+
+                if (GlobalVariables.logedUser.getIzena().equals(nameIn) || ){
+
+                }
+            }
+        });
+
+        // Listener of the atzera
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Go to WorkoutsActivity
                 Intent intent = new Intent(ProfileActivity.this, WorkoutsActivity.class);
                 startActivity(intent);
                 finish();
