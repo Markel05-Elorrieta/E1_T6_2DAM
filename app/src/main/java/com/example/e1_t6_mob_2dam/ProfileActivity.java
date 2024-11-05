@@ -70,9 +70,9 @@ public class ProfileActivity extends AppCompatActivity {
                 String emailIn = etEmailIn.getText().toString();
                 String phoneIn = etPhoneIn.getText().toString();
 
-                if (GlobalVariables.logedUser.getIzena().equals(nameIn) || ){
+                /*if (GlobalVariables.logedUser.getIzena().equals(nameIn) || ){
 
-                }
+                }*/
             }
         });
 

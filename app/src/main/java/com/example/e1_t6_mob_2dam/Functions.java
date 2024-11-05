@@ -33,7 +33,6 @@ public class Functions {
     private User user;
 
     public void checkLogin(User userDB, String passwordIn) throws ErrorWrongPassword, UserNotFound {
-       Log.d("pruebabasedatos", userDB.toString());
         if (userDB.getErabiltzailea() == null) {
             throw new UserNotFound();
         }

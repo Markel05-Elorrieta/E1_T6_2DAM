@@ -1,10 +1,13 @@
 package com.example.e1_t6_mob_2dam;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -48,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         // Get object from view
         EditText userIn = (EditText) findViewById(R.id.ptLogin_user);
         EditText passwordIn = (EditText) findViewById(R.id.ptLogin_password);
+        CheckBox miCheckBox = findViewById(R.id.cbLogin_saveUser);
         Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
         Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
 
@@ -64,6 +68,13 @@ public class LoginActivity extends AppCompatActivity {
                             // Check the user and password are correct with the user of DB
                             // If is OK userOK id in GlobalVariables
                             functions.checkLogin(userOut, passwordIn.getText().toString());
+
+                            if (miCheckBox.isChecked()){
+                                SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("userKey", GlobalVariables.logedUser.getErabiltzailea());
+                                editor.apply();
+                            }
 
                             // Call DB to take the workouts of the user
                             workoutDao.getWorkouts(new WorkoutCallBack() {
