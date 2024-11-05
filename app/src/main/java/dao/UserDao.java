@@ -1,10 +1,14 @@
 package dao;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.e1_t6_mob_2dam.ConectionDB;
 import com.example.e1_t6_mob_2dam.GlobalVariables;
 import CallBacks.UserCallBack;
+
+import com.example.e1_t6_mob_2dam.MainActivity;
+import com.example.e1_t6_mob_2dam.WorkoutsActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -65,5 +69,28 @@ public class UserDao {
                 .addOnFailureListener(e -> {
                     Log.w("Firestore", "Error updating document", e);
                 });
+    }
+
+    public void updateUser (User userUpdate) {
+        Log.d("UpdateDVB", userUpdate.toString());
+        userUpdate.setId(GlobalVariables.logedUser.getId());
+        userUpdate.setMaila(GlobalVariables.logedUser.getMaila());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("erabiltzaileak").document(GlobalVariables.logedUser.getId())
+                .update(
+                        "izena", userUpdate.getIzena(),
+                        "abizenak", userUpdate.getAbizenak(),
+                        "jaiotze_data", userUpdate.getJaiotze_data(),
+                        "email", userUpdate.getEmail(),
+                        "telefonoa", userUpdate.getTelefonoa()
+                ).addOnSuccessListener(aVoid -> {
+                    GlobalVariables.logedUser = userUpdate;
+                })
+                .addOnFailureListener(e -> {
+                    // Failed to update user data
+
+                });
+
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
         String userSaved = sharedPref.getString("userKey","");
 
+        Log.d("pruebas", userSaved);
         if (userSaved.equals("")) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);

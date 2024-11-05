@@ -2,8 +2,10 @@ package com.example.e1_t6_mob_2dam;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,6 +77,11 @@ public class WorkoutsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // When u say continue, Go to LoginActivity
+                        SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("userKey", "");
+                        editor.apply();
+
                         Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -92,7 +99,11 @@ public class WorkoutsActivity extends AppCompatActivity {
         functions.alertDisplayWithListener(builder, "Comprobaketa", "Saioa itxiko da, seguro atera nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // When u say continue, Go to LoginActivity
+                SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("userKey", "");
+                editor.apply();
+
                 Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
