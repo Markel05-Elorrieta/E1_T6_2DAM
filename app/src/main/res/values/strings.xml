@@ -17,8 +17,12 @@
     <string name="txt_lblWorkoutInfo_Header">WORKOUT INFORMAZIOA</string>
     <string name="txt_lblWorkoutKopurua"> </string>
     <string name="txt_btnHasi">HASI</string>
+    <string name="txt_btnGorde">Gorde aldaketak</string>
+    <string name="txt_lblProfile">NIRE PROFILA</string>
+    <string name="txt_btnPasswdChange">Aldatu pasahitza</string>
     <string name="txt_columnName">Izena</string>
     <string name="txt_columnCop">Ariketa Kopurua</string>
+    <string name="txt_lblErabiltzailea"> </string>
     <string name="txt_columnLvl">Maila</string>
 
 </resources>

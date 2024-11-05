@@ -99,7 +99,7 @@ public class Functions {
     public void mostrarDialogoConDosEditText(Context context) {
         // Crear el AlertDialog Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Ingrese los datos");
+        builder.setTitle("Pasahitza aldaketa");
 
         // Crear un LinearLayout para contener los EditText
         LinearLayout layout = new LinearLayout(context);
@@ -107,7 +107,7 @@ public class Functions {
         layout.setPadding(50, 40, 50, 10); // Ajusta el padding si deseas espaciar el contenido
 
         final EditText input = new EditText(context);
-        input.setHint("Pasahitza oraingoa"); // Hint para el primer campo de texto
+        input.setHint("Oraingo pasahitza"); // Hint para el primer campo de texto
         layout.addView(input); // Agregar el primer EditText al layout
 
         // Crear el primer EditText
@@ -117,7 +117,7 @@ public class Functions {
 
         // Crear el segundo EditText
         final EditText input2 = new EditText(context);
-        input2.setHint("Pasahitza errepikatu"); // Hint para el segundo campo de texto
+        input2.setHint("Pasahitza berria errepikatu"); // Hint para el segundo campo de texto
         layout.addView(input2); // Agregar el segundo EditText al layout
 
         // TextView para mostrar el mensaje de error
@@ -130,9 +130,9 @@ public class Functions {
         builder.setView(layout);
 
         // Configurar los botones
-        builder.setPositiveButton("Aceptar", null); // Usar null para evitar el cierre automático
+        builder.setPositiveButton("GORDE", null); // Usar null para evitar el cierre automático
 
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
+        builder.setNegativeButton("UTZI", (dialog, which) -> dialog.dismiss());
 
         // Crear el AlertDialog
         AlertDialog dialog = builder.create();
@@ -150,27 +150,31 @@ public class Functions {
                 errorTextView.setText("");
 
                 // Validar los datos
-                if (BCrypt.checkpw(textoIngresado, GlobalVariables.logedUser.getPasahitza())) {
-                    if (!textoIngresado1.equals(textoIngresado2)) {
-                        errorTextView.setText("Las contraseñas no coinciden.");
-                        errorTextView.requestLayout(); // Forzar la actualización de la vista
-                    } else if (BCrypt.checkpw(textoIngresado1, GlobalVariables.logedUser.getPasahitza())) {
-                        errorTextView.setText("La nueva contraseña no puede ser igual a la actual.");
-                        errorTextView.requestLayout(); // Forzar la actualización de la vista
-                    } else {
-                        // Actualizar la contraseña en la base de datos
-                        errorTextView.setText("Se cambio la contraseña correctamente");
-                        errorTextView.setTextColor(Color.GREEN);
-                        errorTextView.requestLayout();
-                        userDao.updatePwd(textoIngresado1);
-                        GlobalVariables.logedUser.setPasahitza(BCrypt.hashpw(textoIngresado1, BCrypt.gensalt()));
-                        dialog.dismiss(); // Cerrar el diálogo si la contraseña se actualiza
-                    }
-                } else {
-                    errorTextView.setText("La contraseña actulal no coincide");
+                if (textoIngresado.isEmpty() || textoIngresado1.isEmpty() || textoIngresado2.isEmpty()) {
+                    errorTextView.setText("Eremu guztiak bete behar dira.");
                     errorTextView.requestLayout(); // Forzar la actualización de la vista
+                } else {
+                    if (BCrypt.checkpw(textoIngresado, GlobalVariables.logedUser.getPasahitza())) {
+                        if (!textoIngresado1.equals(textoIngresado2)) {
+                            errorTextView.setText("Pasahitzak ez dira berdinak.");
+                            errorTextView.requestLayout(); // Forzar la actualización de la vista
+                        } else if (BCrypt.checkpw(textoIngresado1, GlobalVariables.logedUser.getPasahitza())) {
+                            errorTextView.setText("Pasahitza berria ezin da oraingoaren berdina izan.");
+                            errorTextView.requestLayout(); // Forzar la actualización de la vista
+                        } else {
+                            // Actualizar la contraseña en la base de datos
+                            errorTextView.setText("Pasahitza ondo aldatu da.");
+                            errorTextView.setTextColor(Color.GREEN);
+                            errorTextView.requestLayout();
+                            userDao.updatePwd(textoIngresado1);
+                            GlobalVariables.logedUser.setPasahitza(BCrypt.hashpw(textoIngresado1, BCrypt.gensalt()));
+                            dialog.dismiss(); // Cerrar el diálogo si la contraseña se actualiza
+                        }
+                    } else {
+                        errorTextView.setText("Oraingo pasahitza ez da kointziditzen.");
+                        errorTextView.requestLayout(); // Forzar la actualización de la vista
+                    }
                 }
-
             });
         });
         // Mostrar el diálogo

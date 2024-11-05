@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,8 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
         EditText etPhoneIn = (EditText) findViewById(R.id.etProfile_phone);
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
         Button btnGorde = (Button) findViewById(R.id.etProfile_gorde);
+        TextView tvErabiltzailea = (TextView) findViewById(R.id.tv_Kaixo_Erabiltzailea);
 
         // Write in the EditTexts the actual data
+        tvErabiltzailea.setText("Kaixo, " + GlobalVariables.logedUser.getErabiltzailea() + "! Hemen zure datuak alda dezakezu.");
         etNameIn.setText(GlobalVariables.logedUser.getIzena());
         etSurnameIn.setText(GlobalVariables.logedUser.getAbizenak());
         String dateString = GlobalVariables.logedUser.getJaiotze_data().getDay() + "/" +
@@ -70,9 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String emailIn = etEmailIn.getText().toString();
                 String phoneIn = etPhoneIn.getText().toString();
 
-                /*if (GlobalVariables.logedUser.getIzena().equals(nameIn) || ){
 
-                }*/
             }
         });
 
