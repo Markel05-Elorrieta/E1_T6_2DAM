@@ -13,4 +13,5 @@ public class GlobalVariables {
     public static ArrayList<User> usersDB = new ArrayList<User>();
     public static ArrayList<Workout> workoutsDB = new ArrayList<Workout>();
     public static Workout currentWorkout = new Workout();
+    public static boolean nightMode = false;
 }

@@ -17,7 +17,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import CallBacks.UserCallBack;
 import dao.UserDao;
 import exceptions.ErrorWrongPassword;
 import exceptions.PasswordDoNotMatch;

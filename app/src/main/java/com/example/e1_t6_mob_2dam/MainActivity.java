@@ -8,14 +8,15 @@ import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
-import CallBacks.UserCallBack;
-import CallBacks.WorkoutCallBack;
+import Callback.UserCallBack;
+import Callback.WorkoutCallBack;
 import dao.UserDao;
 import dao.WorkoutDao;
 import objects.User;
@@ -34,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         });
         WorkoutDao workoutDao = new WorkoutDao();
         UserDao userDao = new UserDao();
+
+        SharedPreferences prefTheme = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
+        GlobalVariables.nightMode = prefTheme.getBoolean("NightMode", false);
+
+        if (GlobalVariables.nightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
         String userSaved = sharedPref.getString("userKey","");

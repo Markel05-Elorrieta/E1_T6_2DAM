@@ -46,6 +46,9 @@ public class WorkoutsActivity extends AppCompatActivity {
         // Get object from view
         TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
         ImageButton btnImageProfile = findViewById(R.id.imageButton);
+        TextView userMaila = (TextView) findViewById(R.id.tvWorkoutsLvl);
+        userMaila.setText("Maila:" + GlobalVariables.logedUser.getMaila());
+
         RecyclerView rvWorkoutList = findViewById(R.id.rvWorkout_list);
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
 

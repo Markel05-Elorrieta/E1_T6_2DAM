@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.e1_t6_mob_2dam.ConectionDB;
 import com.example.e1_t6_mob_2dam.GlobalVariables;
-import CallBacks.WorkoutCallBack; // Ensure you have this interface defined
+import Callback.WorkoutCallBack; // Ensure you have this interface defined
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 

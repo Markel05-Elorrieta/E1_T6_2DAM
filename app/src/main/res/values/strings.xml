@@ -24,5 +24,7 @@
     <string name="txt_columnCop">Ariketa Kopurua</string>
     <string name="txt_lblErabiltzailea"> </string>
     <string name="txt_columnLvl">Maila</string>
+    <string name="txt_temaClaro">Argia</string>
+    <string name="txt_temaOscuro">Iluna</string>
 
 </resources>

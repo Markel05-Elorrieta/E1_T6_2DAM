@@ -7,11 +7,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -39,6 +42,11 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
+        SharedPreferences prefTheme = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefTheme.edit();
+        boolean isNightMode = prefTheme.getBoolean("NightMode", false);
+
+
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -49,6 +57,11 @@ public class ProfileActivity extends AppCompatActivity {
         EditText etDateIn = (EditText) findViewById(R.id.etProfile_date);
         EditText etEmailIn = (EditText) findViewById(R.id.etProfile_email);
         EditText etPhoneIn = (EditText) findViewById(R.id.etProfile_phone);
+        Switch sTheme =  (Switch) findViewById(R.id.sProfile_Theme);
+        if(isNightMode){
+            sTheme.setChecked(true);
+        }
+
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
         FloatingActionButton btnItxi = (FloatingActionButton) findViewById(R.id.fbtn_Logout);
         Button btnGorde = (Button) findViewById(R.id.etProfile_gorde);
@@ -93,8 +106,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                     userDao.updateUser(userUpdate);
 
-                    functions.alertDisplay(builder, "Amaituta", "Ondo update", "Segui");
-
                     Intent intent = new Intent(ProfileActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
                     finish();
@@ -103,6 +114,29 @@ public class ProfileActivity extends AppCompatActivity {
                     functions.alertDisplay(builder, "Error", e.getMessage(), "Berriro sahiatu!");
                 }
 
+            }
+        });
+
+
+        if (isNightMode) {
+            sTheme.setText("Iluna");
+        } else {
+            sTheme.setText("Argia");
+        }
+        sTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putBoolean("NightMode", true);
+                    sTheme.setText("Iluna");
+                    editor.apply();
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putBoolean("NightMode", false);
+                    sTheme.setText("Argia");
+                    editor.apply();
+                }
             }
         });
 

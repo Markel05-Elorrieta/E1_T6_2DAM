@@ -1,20 +1,16 @@
 package dao;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.example.e1_t6_mob_2dam.ConectionDB;
 import com.example.e1_t6_mob_2dam.GlobalVariables;
-import CallBacks.UserCallBack;
+import Callback.UserCallBack;
 
-import com.example.e1_t6_mob_2dam.MainActivity;
-import com.example.e1_t6_mob_2dam.WorkoutsActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import objects.User;

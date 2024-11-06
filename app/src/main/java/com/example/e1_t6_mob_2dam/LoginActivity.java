@@ -18,8 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
-import CallBacks.UserCallBack;
-import CallBacks.WorkoutCallBack;
+import Callback.UserCallBack;
+import Callback.WorkoutCallBack;
 import dao.UserDao;
 import dao.WorkoutDao;
 import exceptions.ErrorWrongPassword;
@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Call DB to search user
-                userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
+                userDao.searchUserDBByUser(userIn.getText().toString().toLowerCase(), new UserCallBack() {
                     @Override
                     public void userRetrieved(User userOut) {
                         // When u get the user from DB do this

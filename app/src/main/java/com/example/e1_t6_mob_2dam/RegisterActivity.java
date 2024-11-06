@@ -17,9 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
-import java.util.HashMap;
 
-import CallBacks.UserCallBack;
+import Callback.UserCallBack;
 import dao.UserDao;
 import exceptions.NullField;
 import exceptions.PasswordDoNotMatch;
@@ -78,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
                     // Call DB to search the user
-                    userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
+                    userDao.searchUserDBByUser(userIn.getText().toString().toLowerCase(), new UserCallBack() {
                         @Override
                         public void userRetrieved(User userOut) {
                             // When u get the user from DB do this
@@ -89,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 // If is here is because the info is correct and can register
                                 // Create an user to insert in DB
                                 Date d = new Date(txtDate);
-                                User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
+                                User userNew = new User(txtName, txtSurname, txtUser.toLowerCase(), txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
                                 functions.insertNewUser(userNew);
 
                                 // All done, show Alert saying is register

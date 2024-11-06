@@ -1,4 +1,4 @@
-package CallBacks;
+package Callback;
 
 import objects.User;
 

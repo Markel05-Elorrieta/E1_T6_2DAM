@@ -1,5 +1,5 @@
 // WorkoutCallBack.java
-package CallBacks;
+package Callback;
 
 import java.util.ArrayList;
 import objects.Workout;
