@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
+        /*-----------------------GET VIEW OBJECTS-----------------------*/
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -55,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnRegister_atzera);
         Button btnRegister = (Button) findViewById(R.id.btnRegister_register);
 
-        // Listener of the register button
+        /*-----------------------REGISTER BUTTON-----------------------*/
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // Listener of the atzera
+        /*-----------------------BACK BUTTON-----------------------*/
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // If u push in your mobile back, go to previus Activity
+    /*-----------------------BACK MOBILE-----------------------*/
     @Override
     public void onBackPressed() {
         super.onBackPressed();

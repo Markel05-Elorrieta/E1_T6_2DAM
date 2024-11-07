@@ -2,6 +2,7 @@ package com.example.e1_t6_mob_2dam;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -49,12 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        SharedPreferences prefTheme = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefTheme.edit();
-        boolean isNightMode = prefTheme.getBoolean("NightMode", false);
-
-
+        /*-----------------------GET VIEW OBJECTS-----------------------*/
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -66,15 +62,13 @@ public class ProfileActivity extends AppCompatActivity {
         EditText etEmailIn = (EditText) findViewById(R.id.etProfile_email);
         EditText etPhoneIn = (EditText) findViewById(R.id.etProfile_phone);
         Switch sTheme =  (Switch) findViewById(R.id.sProfile_Theme);
-        if(isNightMode){
-            sTheme.setChecked(true);
-        }
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner_lenguaje);
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
         FloatingActionButton btnItxi = (FloatingActionButton) findViewById(R.id.fbtn_Logout);
         Button btnGorde = (Button) findViewById(R.id.etProfile_gorde);
         TextView tvErabiltzailea = (TextView) findViewById(R.id.tv_Kaixo_Erabiltzailea);
 
+        /*-----------------------PUT USER INFO-----------------------*/
         // Write in the EditTexts the actual data
         tvErabiltzailea.setText("Kaixo, " + GlobalVariables.logedUser.getErabiltzailea() + "! Hemen zure datuak alda dezakezu.");
         etNameIn.setText(GlobalVariables.logedUser.getIzena());
@@ -86,19 +80,56 @@ public class ProfileActivity extends AppCompatActivity {
         etEmailIn.setText(GlobalVariables.logedUser.getEmail());
         etPhoneIn.setText(GlobalVariables.logedUser.getTelefonoa() +"");
 
+        /*-----------------------CHECK APP THEME AND PUT INFO-----------------------*/
+        SharedPreferences prefTheme = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefTheme.edit();
+        boolean isNightMode = prefTheme.getBoolean("NightMode", false);
+        if(isNightMode){
+            sTheme.setChecked(true);
+        }
 
-        String[] languages = {"English", "Spanish", "French", "German", "Chinese"};
+        /*-----------------------SPINNER LENGUAJE-----------------------*/
+        String[] languages = {getString(R.string.txt_lenguajeNone), getString(R.string.txt_lenguajeEnglish), getString(R.string.txt_lenguajeSpanish), getString(R.string.txt_lenguajeBasque)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(adapter);
 
+        /*-----------------------DO WHEN CLICK LENGUAJE-----------------------*/
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 3) {
-                    Log.d("entroalspinner", "entro");
-                    setLocaleeeeee("es");
-                    mySpinner.setSelection(1);
+                if (position == 0) {
+                    return;
+                } else if (position == 1) {
+                    GlobalVariables.lenguaje = "en";
+                    setLocale("en");
+                    functions.alertDisplayWithListener(builder, "Confirmatu", "Seguru hizkuntza aldatu nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mySpinner.setSelection(0);
+                            recreate();
+                        }
+                    });
+                } else if (position == 2) {
+                    GlobalVariables.lenguaje = "es";
+                    setLocale("es");
+                    functions.alertDisplayWithListener(builder, "Confirmatu", "Seguru hizkuntza aldatu nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mySpinner.setSelection(0);
+                            recreate();
+                        }
+                    });
+                } else if (position == 3) {
+                    GlobalVariables.lenguaje = "eu";
+                    setLocale("eu");
+                    functions.alertDisplayWithListener(builder, "Confirmatu", "Seguru hizkuntza aldatu nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mySpinner.setSelection(0);
+                            recreate();
+                        }
+                    });
                 }
             }
 
@@ -108,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-
+        /*-----------------------CHANGE PASSWORD BUTTON-----------------------*/
         // Listener of the button to change the password
         btnPwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        /*-----------------------SAVE BUTTON-----------------------*/
         btnGorde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +203,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        /*-----------------------BACK BUTTON-----------------------*/
         // Listener of the atzera
         btnAtzera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +215,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        /*-----------------------SESSION CLOSE-----------------------*/
         btnItxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,13 +232,11 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void setLocaleeeeee(String languageCode) {
+    private void setLocale(String languageCode) {
         Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-
-        recreate();
     }
 }

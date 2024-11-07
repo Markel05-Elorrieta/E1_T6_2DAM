@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
         Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
 
-        // Listener of the Login
+        /*-----------------------LOGIN BUTTON-----------------------*/
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Listener of the Register
+        /*-----------------------REGISTER BUTTON-----------------------*/
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

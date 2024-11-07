@@ -17,4 +17,5 @@ public class GlobalVariables {
     public static Workout currentWorkout = new Workout();
     public static ArrayList<Ariketa> ariketakDB = new ArrayList<>();
     public static boolean nightMode = false;
+    public static String lenguaje = "";
 }

@@ -8,22 +8,6 @@
     tools:context=".WorkoutInfoActivity">
 
     <Button
-        android:id="@+id/btnWorkoutInfo_join"
-        android:layout_width="103dp"
-        android:layout_height="52dp"
-        android:backgroundTint="@color/design_default_color_secondary"
-        android:text="@string/txt_btnHasi"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <Button
         android:id="@+id/btnWorkoutInfo_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,8 +87,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAriketak_list"
-        android:layout_width="411dp"
-        android:layout_height="207dp"
+        android:layout_width="412dp"
+        android:layout_height="306dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

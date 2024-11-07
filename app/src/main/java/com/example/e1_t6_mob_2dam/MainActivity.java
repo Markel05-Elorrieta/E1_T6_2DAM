@@ -33,27 +33,36 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Objects
         WorkoutDao workoutDao = new WorkoutDao();
         UserDao userDao = new UserDao();
 
+        /*-----------------------THEME-----------------------*/
+        // Put the theme u have save in "ThemePrefs"
         SharedPreferences prefTheme = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
         GlobalVariables.nightMode = prefTheme.getBoolean("NightMode", false);
-
         if (GlobalVariables.nightMode){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
+        /*-----------------------LENGUAGE-----------------------*/
+
+
+        /*-----------------------CACHE-----------------------*/
+        // Check if u have the session saved
         SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
         String userSaved = sharedPref.getString("userKey","");
 
-        Log.d("pruebas", userSaved);
+        // Session is not saved
         if (userSaved.equals("")) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-        } else {
+        }
+        // Session is saved
+        else {
             userDao.searchUserDBByUser(userSaved, new UserCallBack() {
                 @Override
                 public void userRetrieved(User userOut) {
