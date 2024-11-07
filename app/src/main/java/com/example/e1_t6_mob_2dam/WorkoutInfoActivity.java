@@ -1,5 +1,6 @@
 package com.example.e1_t6_mob_2dam;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
+
+import objects.Ariketa;
 
 public class WorkoutInfoActivity extends AppCompatActivity {
     private Functions functions = new Functions();
@@ -38,12 +47,17 @@ public class WorkoutInfoActivity extends AppCompatActivity {
         TextView txtWorkoutMaila = (TextView) findViewById(R.id.tvWorkoutMaila);
         txtWorkoutMaila.setText("Maila: " + GlobalVariables.currentWorkout.getMaila());
         WebView wbYoutubeVideo = findViewById(R.id.web);
+        RecyclerView rvAriketakList = findViewById(R.id.rvAriketak_list);
         Button btnAtzera = (Button) findViewById(R.id.btnWorkoutInfo_back);
 
         // Settings for the webview
         WebSettings webSettings = wbYoutubeVideo.getSettings();
         webSettings.setJavaScriptEnabled(true);
         wbYoutubeVideo.loadUrl(GlobalVariables.currentWorkout.getVideoURL());
+
+        AdapterAriketaList adapterAriketaList = new AdapterAriketaList(this, GlobalVariables.ariketakDB);
+        rvAriketakList.setLayoutManager(new LinearLayoutManager(this));
+        rvAriketakList.setAdapter(adapterAriketaList);
 
         // Listener of the Atzera
         btnAtzera.setOnClickListener(new View.OnClickListener() {

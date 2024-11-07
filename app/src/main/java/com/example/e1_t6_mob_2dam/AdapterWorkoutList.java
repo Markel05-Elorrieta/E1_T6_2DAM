@@ -12,6 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+
+import Callback.AriketaCallBack;
+import Callback.WorkoutCallBack;
+import dao.AriketaDao;
+import objects.Ariketa;
 import objects.Workout;
 
 public class AdapterWorkoutList extends RecyclerView.Adapter<AdapterWorkoutList.WorkoutViewHolder> {
@@ -58,9 +63,20 @@ public class AdapterWorkoutList extends RecyclerView.Adapter<AdapterWorkoutList.
         // Set click listener for the item
         holder.itemView.setOnClickListener(view -> {
             Log.d("Workout Clicked", "Workout clicked: " + currentWorkout.getIzena());
-            Intent intent = new Intent(context, WorkoutInfoActivity.class);
+            AriketaDao ariketaDao = new AriketaDao();
+
             GlobalVariables.currentWorkout = currentWorkout;
-            context.startActivity(intent);
+
+            ariketaDao.getAriketakByArrayId(currentWorkout.getAriketakId(), new AriketaCallBack() {
+                @Override
+                public void onAriketakRetrieved(ArrayList<Ariketa> ariketak) {
+
+                    GlobalVariables.ariketakDB = ariketak;
+                    Intent intent = new Intent(context, WorkoutInfoActivity.class);
+                    context.startActivity(intent);
+                    Log.d("sacararray", GlobalVariables.ariketakDB.size() + "");
+                }
+            });
         });
     }
 

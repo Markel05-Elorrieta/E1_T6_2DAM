@@ -4,13 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +29,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
+import java.util.Locale;
 
 import dao.UserDao;
 import exceptions.NullField;
@@ -61,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(isNightMode){
             sTheme.setChecked(true);
         }
-
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner_lenguaje);
         FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnProfile_atzera);
         FloatingActionButton btnItxi = (FloatingActionButton) findViewById(R.id.fbtn_Logout);
         Button btnGorde = (Button) findViewById(R.id.etProfile_gorde);
@@ -77,6 +85,29 @@ public class ProfileActivity extends AppCompatActivity {
         etDateIn.setText(dateString);
         etEmailIn.setText(GlobalVariables.logedUser.getEmail());
         etPhoneIn.setText(GlobalVariables.logedUser.getTelefonoa() +"");
+
+
+        String[] languages = {"English", "Spanish", "French", "German", "Chinese"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(adapter);
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 3) {
+                    Log.d("entroalspinner", "entro");
+                    setLocaleeeeee("es");
+                    mySpinner.setSelection(1);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
 
         // Listener of the button to change the password
         btnPwd.setOnClickListener(new View.OnClickListener() {
@@ -165,5 +196,15 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setLocaleeeeee(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+        recreate();
     }
 }

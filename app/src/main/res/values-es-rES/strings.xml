@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JEM Fit</string>
+    <string name="txt_lblUser">Usuario</string>
+    <string name="txt_lblPassword">Contraseña</string>
+    <string name="txt_btnLogin">INICIAR SESIÓN</string>
+    <string name="txt_btnRegister">REGISTRARSE</string>
+    <string name="txt_cbSaioaGogoratu">Recordar sesión</string>
+    <string name="txt_lblWorkouts">ENTRENAMIENTOS</string>
+    <string name="txt_lblPassword2">Repetir contraseña</string>
+    <string name="txt_lblBerria">¿Eres nuevo? Regístrate aquí.</string>
+    <string name="txt_lblName">Nombre</string>
+    <string name="txt_lblSurname">Apellido</string>
+    <string name="txt_lblEmail">Correo electrónico</string>
+    <string name="txt_lblPhone">Teléfono</string>
+    <string name="txt_lblDate">Fecha de nacimiento</string>
+    <string name="txt_btnAtzera">Atrás</string>
+    <string name="txt_lblWorkoutInfo_Header">INFORMACIÓN DE ENTRENAMIENTO</string>
+    <string name="txt_lblWorkoutKopurua"> </string>
+    <string name="txt_btnHasi">EMPEZAR</string>
+    <string name="txt_btnGorde">Guardar cambios</string>
+    <string name="txt_lblProfile">MI PERFIL</string>
+    <string name="txt_btnPasswdChange">Cambiar contraseña</string>
+    <string name="txt_columnName">Nombre</string>
+    <string name="txt_columnCop">Cantidad de ejercicios</string>
+    <string name="txt_lblErabiltzailea"> </string>
+    <string name="txt_columnLvl">Nivel</string>
+    <string name="txt_temaClaro">Claro</string>
+    <string name="txt_temaOscuro">Oscuro</string>
+</resources>

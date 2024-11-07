@@ -3,6 +3,7 @@ package com.example.e1_t6_mob_2dam;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.util.Log;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import dao.UserDao;
 import exceptions.ErrorWrongPassword;
@@ -179,7 +181,4 @@ public class Functions {
         // Mostrar el diálogo
         dialog.show();// O devuelve un valor adecuado según tu lógica
     }
-
-
-
 }
