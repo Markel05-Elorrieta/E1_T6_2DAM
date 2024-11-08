@@ -3,25 +3,21 @@ package com.example.e1_t6_mob_2dam;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.graphics.Color;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 
 import dao.UserDao;
+import exceptions.EmailFormatError;
 import exceptions.ErrorWrongPassword;
 import exceptions.PasswordDoNotMatch;
+import exceptions.PhoneFormatError;
 import exceptions.UserAlreadyExists;
 import exceptions.UserNotFound;
 import objects.User;
@@ -38,42 +34,25 @@ public class Functions {
             throw new UserNotFound();
         }
         else if (!BCrypt.checkpw(passwordIn, userDB.getPasahitza())) {
-                throw new ErrorWrongPassword();
+            throw new ErrorWrongPassword();
         } else {
             GlobalVariables.logedUser = userDB;
         }
     }
 
-    public void checkRegister (User userDB, String passwordIn, String password2In) throws PasswordDoNotMatch, UserAlreadyExists {
+    public void checkRegister (User userDB, String passwordIn, String password2In, String emailIn, String phoneIn) throws PasswordDoNotMatch, UserAlreadyExists, EmailFormatError, PhoneFormatError, NumberFormatException {
         /** Falta comprobar la fecha, telefono...**/
-        if (userDB.getErabiltzailea() != null){
+        if (userDB.getErabiltzailea() != null) {
             throw new UserAlreadyExists();
+        }
+        int phoneNum = Integer.parseInt(phoneIn);
+        if (!emailIn.contains("@") || !emailIn.contains(".")) {
+            throw new EmailFormatError();
+        } else if (phoneNum < 0 || phoneNum > 999999999 || phoneIn.length() != 9){
+            throw new PhoneFormatError();
         } else if (!passwordIn.equals(password2In)){
             throw new PasswordDoNotMatch();
         }
-    }
-
-    public void insertNewUser(User userNew){
-        FirebaseFirestore db = conectionDB.getConnection();
-
-        HashMap<String, Object> userNewHashMap = new HashMap<>();
-        userNewHashMap.put("erabiltzailea", userNew.getErabiltzailea());
-        userNewHashMap.put("izena", userNew.getIzena());
-        userNewHashMap.put("abizenak", userNew.getAbizenak());
-        userNewHashMap.put("pasahitza", BCrypt.hashpw(userNew.getPasahitza(), BCrypt.gensalt()));
-        userNewHashMap.put("email", userNew.getEmail());
-        userNewHashMap.put("maila", userNew.getMaila());
-        userNewHashMap.put("telefonoa", userNew.getTelefonoa());
-        userNewHashMap.put("jaiotze_data", userNew.getJaiotze_data());
-        userNewHashMap.put("argazkia", userNew.getimgBase64());
-
-        db.collection("erabiltzaileak").add(userNewHashMap).addOnSuccessListener(documentReference -> {
-                    Log.d("Firestore", "DocumentSnapshot added with ID: " + documentReference.getId());
-                })
-                .addOnFailureListener(e -> {
-                    Log.w("Firestore", "Error adding document", e);
-                });
-
     }
 
     public void alertDisplay(AlertDialog.Builder builder, String title, String msg, String msgBtn){
@@ -100,7 +79,7 @@ public class Functions {
     public void mostrarDialogoConDosEditText(Context context) {
         // Crear el AlertDialog Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Pasahitza aldaketa");
+        builder.setTitle(context.getString(R.string.txt_btnPasswordChange));
 
         // Crear un LinearLayout para contener los EditText
         LinearLayout layout = new LinearLayout(context);
@@ -108,17 +87,17 @@ public class Functions {
         layout.setPadding(50, 40, 50, 10); // Ajusta el padding si deseas espaciar el contenido
 
         final EditText input = new EditText(context);
-        input.setHint("Oraingo pasahitza"); // Hint para el primer campo de texto
+        input.setHint(context.getString(R.string.txt_lblCurrentPassword)); // Hint para el primer campo de texto
         layout.addView(input); // Agregar el primer EditText al layout
 
         // Crear el primer EditText
         final EditText input1 = new EditText(context);
-        input1.setHint("Pasahitza berria"); // Hint para el primer campo de texto
+        input1.setHint(context.getString(R.string.txt_lblnewPassword)); // Hint para el primer campo de texto
         layout.addView(input1); // Agregar el primer EditText al layout
 
         // Crear el segundo EditText
         final EditText input2 = new EditText(context);
-        input2.setHint("Pasahitza berria errepikatu"); // Hint para el segundo campo de texto
+        input2.setHint(context.getString(R.string.txt_lblnewPasswordRepeat)); // Hint para el segundo campo de texto
         layout.addView(input2); // Agregar el segundo EditText al layout
 
         // TextView para mostrar el mensaje de error
@@ -131,9 +110,7 @@ public class Functions {
         builder.setView(layout);
 
         // Configurar los botones
-        builder.setPositiveButton("GORDE", null); // Usar null para evitar el cierre automático
-
-        builder.setNegativeButton("UTZI", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(context.getString(R.string.txt_btnSave), null); // Usar null para evitar el cierre automático
 
         // Crear el AlertDialog
         AlertDialog dialog = builder.create();
@@ -152,27 +129,24 @@ public class Functions {
 
                 // Validar los datos
                 if (textoIngresado.isEmpty() || textoIngresado1.isEmpty() || textoIngresado2.isEmpty()) {
-                    errorTextView.setText("Eremu guztiak bete behar dira.");
+                    errorTextView.setText(context.getString(R.string.txt_NullField));
                     errorTextView.requestLayout(); // Forzar la actualización de la vista
                 } else {
                     if (BCrypt.checkpw(textoIngresado, GlobalVariables.logedUser.getPasahitza())) {
                         if (!textoIngresado1.equals(textoIngresado2)) {
-                            errorTextView.setText("Pasahitzak ez dira berdinak.");
+                            errorTextView.setText(context.getString(R.string.txt_PasswordDoNotMatch));
                             errorTextView.requestLayout(); // Forzar la actualización de la vista
                         } else if (BCrypt.checkpw(textoIngresado1, GlobalVariables.logedUser.getPasahitza())) {
-                            errorTextView.setText("Pasahitza berria ezin da oraingoaren berdina izan.");
+                            errorTextView.setText(context.getString(R.string.txt_PasswordCurrentSameNew));
                             errorTextView.requestLayout(); // Forzar la actualización de la vista
                         } else {
                             // Actualizar la contraseña en la base de datos
-                            errorTextView.setText("Pasahitza ondo aldatu da.");
-                            errorTextView.setTextColor(Color.GREEN);
-                            errorTextView.requestLayout();
                             userDao.updatePwd(textoIngresado1);
                             GlobalVariables.logedUser.setPasahitza(BCrypt.hashpw(textoIngresado1, BCrypt.gensalt()));
                             dialog.dismiss(); // Cerrar el diálogo si la contraseña se actualiza
                         }
                     } else {
-                        errorTextView.setText("Oraingo pasahitza ez da kointziditzen.");
+                        errorTextView.setText(context.getString(R.string.txt_CurrentPasswordError));
                         errorTextView.requestLayout(); // Forzar la actualización de la vista
                     }
                 }

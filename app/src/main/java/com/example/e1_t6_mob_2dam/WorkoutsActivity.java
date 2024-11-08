@@ -40,6 +40,7 @@ public class WorkoutsActivity extends AppCompatActivity {
             return insets;
         });
 
+        GlobalVariables.context = this;
         // Builder to do the AlertDialogs
         builder = new AlertDialog.Builder(this);
 
@@ -47,13 +48,13 @@ public class WorkoutsActivity extends AppCompatActivity {
         TextView workoutsKopurua = (TextView) findViewById(R.id.tvWorkoutsKopurua);
         ImageButton btnImageProfile = findViewById(R.id.imageButton);
         TextView userMaila = (TextView) findViewById(R.id.tvWorkoutsLvl);
-        userMaila.setText("Maila:" + GlobalVariables.logedUser.getMaila());
+        userMaila.setText(getString(R.string.txt_columnLvl) + " " + GlobalVariables.logedUser.getMaila());
 
         RecyclerView rvWorkoutList = findViewById(R.id.rvWorkout_list);
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
 
         // Set nombre of workouts in the text
-        workoutsKopurua.setText("Workouts kopurua: " + GlobalVariables.workoutsDB.size());
+        workoutsKopurua.setText(getString(R.string.txt_lblWorkoutNumber) + " " + GlobalVariables.workoutsDB.size());
 
         // Set img of the user in the button
         btnImageProfile.setImageBitmap(GlobalVariables.logedUser.getBitmap());
@@ -76,7 +77,7 @@ public class WorkoutsActivity extends AppCompatActivity {
         atzeraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                functions.alertDisplayWithListener(builder, "Comprobaketa", "Saioa itxiko da, seguro atera nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LogOutAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // When u say continue, Go to LoginActivity
@@ -99,7 +100,7 @@ public class WorkoutsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        functions.alertDisplayWithListener(builder, "Comprobaketa", "Saioa itxiko da, seguro atera nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+        functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LogOutAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);

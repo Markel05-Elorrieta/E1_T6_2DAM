@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         // Objects
+        GlobalVariables.context = this;
         WorkoutDao workoutDao = new WorkoutDao();
         UserDao userDao = new UserDao();
 

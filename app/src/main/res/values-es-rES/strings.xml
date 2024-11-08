@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- LOGIN -->
     <string name="app_name">JEM Fit</string>
-    <string name="txt_lblUser">Usuario</string>
+    <string name="txt_lblUser">Nombre de usuario</string>
     <string name="txt_lblPassword">Contraseña</string>
+    <string name="txt_cbRememberSesion">Recordar sesión</string>
     <string name="txt_btnLogin">INICIAR SESIÓN</string>
+    <string name="txt_lblInfoForRegister">¿Nuevo aquí? Regístrate aquí.</string>
     <string name="txt_btnRegister">REGISTRARSE</string>
-    <string name="txt_cbSaioaGogoratu">Recordar sesión</string>
-    <string name="txt_lblWorkouts">ENTRENAMIENTOS</string>
-    <string name="txt_lblPassword2">Repetir contraseña</string>
-    <string name="txt_lblBerria">¿Nuevo? Regístrate aquí.</string>
+
+    <!-- REGISTER -->
     <string name="txt_lblName">Nombre</string>
     <string name="txt_lblSurname">Apellido</string>
-    <string name="txt_lblEmail">Correo electrónico</string>
+    <string name="txt_lblPassword2">Repetir Contraseña</string>
+    <string name="txt_lblDate">Fecha de Nacimiento</string>
+    <string name="txt_lblEmail">Correo Electrónico</string>
     <string name="txt_lblPhone">Teléfono</string>
-    <string name="txt_lblDate">Fecha de nacimiento</string>
-    <string name="txt_btnAtzera">Atrás</string>
-    <string name="txt_lblWorkoutInfo_Header">INFORMACIÓN DEL ENTRENAMIENTO</string>
-    <string name="txt_lblWorkoutKopurua"> </string>
-    <string name="txt_btnHasi">EMPEZAR</string>
-    <string name="txt_btnGorde">Guardar cambios</string>
-    <string name="txt_lblProfile">MI PERFIL</string>
-    <string name="txt_btnPasswdChange">Cambiar contraseña</string>
-    <string name="txt_columnName">Nombre</string>
-    <string name="txt_columnCop">Número de ejercicios</string>
-    <string name="txt_lblErabiltzailea"> </string>
-    <string name="txt_columnLvl">Nivel</string>
-    <string name="txt_temaClaro">Claro</string>
-    <string name="txt_temaOscuro">Oscuro</string>
 
+    <!-- WORKOUT -->
+    <string name="txt_lblWorkouts">ENTRENAMIENTOS</string>
+    <string name="txt_lblWorkoutNumber">Número de Entrenamientos: </string>
+    <string name="txt_columnName">Nombre</string>
+    <string name="txt_columnCop">Número de Ejercicios</string>
+    <string name="txt_columnLvl">Nivel</string>
+    <string name="txt_btnHistory">Historial</string>
+
+    <!-- WORKOUT-INFO -->
+    <string name="txt_lblWorkoutInfo_Header">INFORMACIÓN DEL ENTRENAMIENTO</string>
+    <string name="txt_btnAtzera">Atrás</string>
+
+    <!-- PROFILE -->
+    <string name="txt_lblProfile">MI PERFIL</string>
+    <string name="txt_lblHello">Hola, </string>
+    <string name="txt_lblProfileInfo">! Aquí puedes cambiar tu información.</string>
+    <string name="txt_btnPasswordChange">Cambiar contraseña</string>
+    <string name="txt_lblCurrentPassword">Contraseña actual</string>
+    <string name="txt_lblnewPassword">Nueva contraseña</string>
+    <string name="txt_lblnewPasswordRepeat">Repetir nueva contraseña</string>
+    <string name="txt_ClearTheme">Claro</string>
+    <string name="txt_DarkTheme">Oscuro</string>
     <string name="txt_lenguajeNone">Seleccionar idioma</string>
     <string name="txt_lenguajeSpanish">Español</string>
     <string name="txt_lenguajeEnglish">Inglés</string>
     <string name="txt_lenguajeBasque">Euskera</string>
+    <string name="txt_LenguajeChangeAlert">¿Estás seguro de que deseas cambiar el idioma?</string>
+    <string name="txt_btnSave">Guardar cambios</string>
+
+    <!-- EXCEPTION -->
+    <string name="txt_EmailFormatError">¡El correo electrónico no tiene el formato correcto!</string>
+    <string name="txt_ErrorWrongPassword">¡La contraseña es incorrecta!</string>
+    <string name="txt_IlogicalDate">¡La fecha no tiene sentido!</string>
+    <string name="txt_NullField">¡No has completado todos los campos!</string>
+    <string name="txt_PasswordDoNotMatch">¡Las contraseñas no coinciden!</string>
+    <string name="txt_PhoneFormatError">¡El formato del número de teléfono es incorrecto!</string>
+    <string name="txt_UserAlreadyExists">¡El usuario ya existe!</string>
+    <string name="txt_UserNotFound">¡El usuario no existe!</string>
+
+    <!-- ERROR MSG -->
+    <string name="txt_LoginError">¡Error de inicio de sesión!</string>
+    <string name="txt_Continue">Continuar</string>
+    <string name="txt_TryAgain">¡Intenta de nuevo!</string>
+    <string name="txt_Confirm">Confirmar</string>
+    <string name="txt_RegisterCorrectAlert">Registro Correcto</string>
+    <string name="txt_RegisterCorrect">¡Usuario creado exitosamente!</string>
+    <string name="txt_RegisterErrorAlert">Error de Registro</string>
+    <string name="txt_NeedToConfirmAlert">Se requiere confirmación</string>
+    <string name="txt_LogOutAlert">¿Estás seguro de que deseas cerrar sesión?</string>
+    <string name="txt_YesAlert">Sí</string>
+    <string name="txt_NoAlert">No</string>
+    <string name="txt_PasswordCurrentSameNew">¡La nueva contraseña no puede ser la misma que la actual!</string>
+    <string name="txt_CurrentPasswordError">¡La contraseña actual no coincide!</string>
 </resources>

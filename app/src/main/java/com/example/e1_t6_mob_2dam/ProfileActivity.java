@@ -50,7 +50,9 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         /*-----------------------GET VIEW OBJECTS-----------------------*/
+        GlobalVariables.context = this;
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -70,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         /*-----------------------PUT USER INFO-----------------------*/
         // Write in the EditTexts the actual data
-        tvErabiltzailea.setText("Kaixo, " + GlobalVariables.logedUser.getErabiltzailea() + "! Hemen zure datuak alda dezakezu.");
+        tvErabiltzailea.setText(getString(R.string.txt_lblHello) + GlobalVariables.logedUser.getErabiltzailea() + getString(R.string.txt_lblProfileInfo));
         etNameIn.setText(GlobalVariables.logedUser.getIzena());
         etSurnameIn.setText(GlobalVariables.logedUser.getAbizenak());
         String dateString = GlobalVariables.logedUser.getJaiotze_data().getDay() + "/" +
@@ -103,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if (position == 1) {
                     GlobalVariables.lenguaje = "en";
                     setLocale("en");
-                    functions.alertDisplayWithListener(builder, "Confirmatu", "Seguru hizkuntza aldatu nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mySpinner.setSelection(0);
@@ -113,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if (position == 2) {
                     GlobalVariables.lenguaje = "es";
                     setLocale("es");
-                    functions.alertDisplayWithListener(builder, "Confirmatu", "Seguru hizkuntza aldatu nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mySpinner.setSelection(0);
@@ -123,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if (position == 3) {
                     GlobalVariables.lenguaje = "eu";
                     setLocale("eu");
-                    functions.alertDisplayWithListener(builder, "Confirmatu", "Seguru hizkuntza aldatu nahi duzu?", "Confirm", new DialogInterface.OnClickListener() {
+                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mySpinner.setSelection(0);
@@ -174,7 +176,7 @@ public class ProfileActivity extends AppCompatActivity {
                     finish();
 
                 } catch (NullField | NumberFormatException e) {
-                    functions.alertDisplay(builder, "Error", e.getMessage(), "Berriro sahiatu!");
+                    functions.alertDisplay(builder, "Error", e.getMessage(), getString(R.string.txt_TryAgain));
                 }
 
             }
@@ -182,9 +184,9 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         if (isNightMode) {
-            sTheme.setText("Iluna");
+            sTheme.setText(getString(R.string.txt_DarkTheme));
         } else {
-            sTheme.setText("Argia");
+            sTheme.setText(getString((R.string.txt_ClearTheme)));
         }
         sTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -192,12 +194,12 @@ public class ProfileActivity extends AppCompatActivity {
                 if (isChecked) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     editor.putBoolean("NightMode", true);
-                    sTheme.setText("Iluna");
+                    sTheme.setText(getString(R.string.txt_DarkTheme));
                     editor.apply();
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor.putBoolean("NightMode", false);
-                    sTheme.setText("Argia");
+                    sTheme.setText(getString((R.string.txt_ClearTheme)));
                     editor.apply();
                 }
             }
@@ -220,14 +222,20 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Go to Login Activity
-                SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("userKey", "");
-                editor.apply();
+                functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LogOutAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // When u say continue, Go to LoginActivity
+                        SharedPreferences sharedPref = getSharedPreferences("cache", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("userKey", "");
+                        editor.apply();
 
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             }
         });
     }

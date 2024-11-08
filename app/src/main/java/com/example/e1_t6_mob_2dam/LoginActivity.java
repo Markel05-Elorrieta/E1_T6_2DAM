@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        GlobalVariables.context = this;
 
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         } catch (ErrorWrongPassword | UserNotFound error) {
                             // Login txarto atera alerta bat
-                            functions.alertDisplay(builder, "Login txarto", error.getMessage(), "Berriro sahiatu");
+                            functions.alertDisplay(builder, getString(R.string.txt_LoginError), error.getMessage(), getString(R.string.txt_TryAgain));
                         }
                     }
                 });

@@ -11,6 +11,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import objects.User;
@@ -53,6 +54,29 @@ public class UserDao {
                 userCallBack.userRetrieved(userDB);
             }
         });
+    }
+
+    public void insertNewUser(User userNew){
+        FirebaseFirestore db = conectionDB.getConnection();
+
+        HashMap<String, Object> userNewHashMap = new HashMap<>();
+        userNewHashMap.put("erabiltzailea", userNew.getErabiltzailea());
+        userNewHashMap.put("izena", userNew.getIzena());
+        userNewHashMap.put("abizenak", userNew.getAbizenak());
+        userNewHashMap.put("pasahitza", BCrypt.hashpw(userNew.getPasahitza(), BCrypt.gensalt()));
+        userNewHashMap.put("email", userNew.getEmail());
+        userNewHashMap.put("maila", userNew.getMaila());
+        userNewHashMap.put("telefonoa", userNew.getTelefonoa());
+        userNewHashMap.put("jaiotze_data", userNew.getJaiotze_data());
+        userNewHashMap.put("argazkia", userNew.getimgBase64());
+
+        db.collection("erabiltzaileak").add(userNewHashMap).addOnSuccessListener(documentReference -> {
+                    Log.d("Firestore", "DocumentSnapshot added with ID: " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("Firestore", "Error adding document", e);
+                });
+
     }
 
     public void updatePwd(String newPdw) {

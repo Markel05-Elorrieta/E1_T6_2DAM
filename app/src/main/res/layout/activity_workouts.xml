@@ -47,9 +47,8 @@
 
     <TextView
         android:id="@+id/tvWorkoutsKopurua"
-        android:layout_width="173dp"
-        android:layout_height="32dp"
-        android:text="@string/txt_lblWorkoutKopurua"
+        android:layout_width="228dp"
+        android:layout_height="29dp"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,8 +73,8 @@
 
     <TextView
         android:id="@+id/tvWorkout_columnCop"
-        android:layout_width="117dp"
-        android:layout_height="23dp"
+        android:layout_width="135dp"
+        android:layout_height="22dp"
         android:text="@string/txt_columnCop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +132,7 @@
         android:id="@+id/btnProfile_History"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Historial"
+        android:text="@string/txt_btnHistory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.051"

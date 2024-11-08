@@ -1,5 +1,7 @@
 package com.example.e1_t6_mob_2dam;
 
+import android.content.Context;
+
 import org.checkerframework.checker.units.qual.A;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -18,4 +20,5 @@ public class GlobalVariables {
     public static ArrayList<Ariketa> ariketakDB = new ArrayList<>();
     public static boolean nightMode = false;
     public static String lenguaje = "";
+    public static Context context;
 }

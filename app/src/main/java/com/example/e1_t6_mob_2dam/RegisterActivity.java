@@ -20,8 +20,10 @@ import java.util.Date;
 
 import Callback.UserCallBack;
 import dao.UserDao;
+import exceptions.EmailFormatError;
 import exceptions.NullField;
 import exceptions.PasswordDoNotMatch;
+import exceptions.PhoneFormatError;
 import exceptions.UserAlreadyExists;
 import objects.User;
 
@@ -41,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         /*-----------------------GET VIEW OBJECTS-----------------------*/
+        GlobalVariables.context = this;
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -84,16 +87,16 @@ public class RegisterActivity extends AppCompatActivity {
                             // When u get the user from DB do this
                             try {
                                 // Check if u can register with the info user provide
-                                functions.checkRegister(userOut, passwordIn.getText().toString(),password2In.getText().toString());
+                                functions.checkRegister(userOut, txtPassword, txtPassword2, txtEmail, txtPhone);
 
                                 // If is here is because the info is correct and can register
                                 // Create an user to insert in DB
                                 Date d = new Date(txtDate);
                                 User userNew = new User(txtName, txtSurname, txtUser.toLowerCase(), txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
-                                functions.insertNewUser(userNew);
+                                userDao.insertNewUser(userNew);
 
                                 // All done, show Alert saying is register
-                                functions.alertDisplayWithListener(builder, "Erregistro ondo", "Erabiltzailea ondo sortu da!", "Hurrengoa", new DialogInterface.OnClickListener() {
+                                functions.alertDisplayWithListener(builder, getString(R.string.txt_RegisterCorrectAlert), getString(R.string.txt_RegisterCorrect), getString(R.string.txt_Continue), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         // When u say continue, Go to LoginActivity
@@ -102,15 +105,18 @@ public class RegisterActivity extends AppCompatActivity {
                                         finish();
                                     }
                                 });
-                            } catch (PasswordDoNotMatch | UserAlreadyExists error) {
+                            } catch (PasswordDoNotMatch | UserAlreadyExists | EmailFormatError |
+                                     PhoneFormatError error) {
                                 // Alert display for errors
-                                functions.alertDisplay(builder, "Erregistro txarto", error.getMessage(), "Berriro sahiatu");
+                                functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), error.getMessage(), getString(R.string.txt_TryAgain));
+                            } catch (NumberFormatException numberFormatException){
+                                functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), getString(R.string.txt_PhoneFormatError), getString(R.string.txt_TryAgain));
                             }
                         }
                     });
-                } catch (NullField |  NumberFormatException error) {
+                } catch (NullField | NumberFormatException error) {
                     // Alert display for errors
-                    functions.alertDisplay(builder, "Erregistro txarto", error.getMessage(), "Berriro sahiatu");
+                    functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), error.getMessage(), getString(R.string.txt_TryAgain));
                 }
             }
         });

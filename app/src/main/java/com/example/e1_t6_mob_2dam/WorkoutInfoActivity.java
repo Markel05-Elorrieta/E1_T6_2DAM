@@ -38,6 +38,7 @@ public class WorkoutInfoActivity extends AppCompatActivity {
             return insets;
         });
 
+        GlobalVariables.context = this;
         // Builder to do the AlertDialogs
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -45,7 +46,7 @@ public class WorkoutInfoActivity extends AppCompatActivity {
         TextView txtWorkoutName = (TextView) findViewById(R.id.tvWorkoutName);
         txtWorkoutName.setText(GlobalVariables.currentWorkout.getIzena());
         TextView txtWorkoutMaila = (TextView) findViewById(R.id.tvWorkoutMaila);
-        txtWorkoutMaila.setText("Maila: " + GlobalVariables.currentWorkout.getMaila());
+        txtWorkoutMaila.setText(getString(R.string.txt_columnLvl) + " " + GlobalVariables.currentWorkout.getMaila());
         WebView wbYoutubeVideo = findViewById(R.id.web);
         RecyclerView rvAriketakList = findViewById(R.id.rvAriketak_list);
         Button btnAtzera = (Button) findViewById(R.id.btnWorkoutInfo_back);
