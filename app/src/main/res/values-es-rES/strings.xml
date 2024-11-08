@@ -43,6 +43,7 @@
     <string name="txt_lenguajeSpanish">Español</string>
     <string name="txt_lenguajeEnglish">Inglés</string>
     <string name="txt_lenguajeBasque">Euskera</string>
+    <string name="txt_lenguajePolish">Polaco</string>
     <string name="txt_LenguajeChangeAlert">¿Estás seguro de que deseas cambiar el idioma?</string>
     <string name="txt_btnSave">Guardar cambios</string>
 

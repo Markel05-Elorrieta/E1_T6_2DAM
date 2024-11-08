@@ -91,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         /*-----------------------SPINNER LENGUAJE-----------------------*/
-        String[] languages = {getString(R.string.txt_lenguajeNone), getString(R.string.txt_lenguajeEnglish), getString(R.string.txt_lenguajeSpanish), getString(R.string.txt_lenguajeBasque)};
+        String[] languages = {getString(R.string.txt_lenguajeNone), getString(R.string.txt_lenguajeEnglish), getString(R.string.txt_lenguajeSpanish), getString(R.string.txt_lenguajeBasque), getString(R.string.txt_lenguajePolish)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(adapter);
@@ -125,6 +125,16 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if (position == 3) {
                     GlobalVariables.lenguaje = "eu";
                     setLocale("eu");
+                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mySpinner.setSelection(0);
+                            recreate();
+                        }
+                    });
+                } else if (position == 4) {
+                    GlobalVariables.lenguaje = "pl";
+                    setLocale("pl");
                     functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -43,6 +43,8 @@
     <string name="txt_lenguajeSpanish">Spanish</string>
     <string name="txt_lenguajeEnglish">English</string>
     <string name="txt_lenguajeBasque">Basque</string>
+    <string name="txt_lenguajePolish">Polish</string>
+
     <string name="txt_LenguajeChangeAlert">Are you sure you want to change the lenguaje?</string>
     <string name="txt_btnSave">Save changes</string>
 

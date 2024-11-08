@@ -1,2 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- LOGIN -->
+    <string name="app_name">JEM Fit</string>
+    <string name="txt_lblUser">Nazwa użytkownika</string>
+    <string name="txt_lblPassword">Hasło</string>
+    <string name="txt_cbRememberSesion">Zapamiętaj sesję</string>
+    <string name="txt_btnLogin">ZALOGUJ SIĘ</string>
+    <string name="txt_lblInfoForRegister">Nowy tutaj? Zarejestruj się tutaj.</string>
+    <string name="txt_btnRegister">ZAREJESTRUJ SIĘ</string>
+
+    <!-- REGISTER -->
+    <string name="txt_lblName">Imię</string>
+    <string name="txt_lblSurname">Nazwisko</string>
+    <string name="txt_lblPassword2">Powtórz hasło</string>
+    <string name="txt_lblDate">Data urodzenia</string>
+    <string name="txt_lblEmail">E-mail</string>
+    <string name="txt_lblPhone">Telefon</string>
+
+    <!-- WORKOUT -->
+    <string name="txt_lblWorkouts">TRENINGI</string>
+    <string name="txt_lblWorkoutNumber">Liczba treningów: </string>
+    <string name="txt_columnName">Nazwa</string>
+    <string name="txt_columnCop">Liczba ćwiczeń</string>
+    <string name="txt_columnLvl">Poziom</string>
+    <string name="txt_btnHistory">Historia</string>
+
+    <!-- WORKOUT-INFO -->
+    <string name="txt_lblWorkoutInfo_Header">INFORMACJE O TRENINGU</string>
+    <string name="txt_btnAtzera">Powrót</string>
+
+    <!-- PROFILE -->
+    <string name="txt_lblProfile">MÓJ PROFIL</string>
+    <string name="txt_lblHello">Witaj, </string>
+    <string name="txt_lblProfileInfo">! Tutaj możesz zmienić swoje dane.</string>
+    <string name="txt_btnPasswordChange">Zmień hasło</string>
+    <string name="txt_lblCurrentPassword">Obecne hasło</string>
+    <string name="txt_lblnewPassword">Nowe hasło</string>
+    <string name="txt_lblnewPasswordRepeat">Powtórz nowe hasło</string>
+    <string name="txt_ClearTheme">Jasny</string>
+    <string name="txt_DarkTheme">Ciemny</string>
+    <string name="txt_lenguajeNone">Wybierz język</string>
+    <string name="txt_lenguajeSpanish">Hiszpański</string>
+    <string name="txt_lenguajeEnglish">Angielski</string>
+    <string name="txt_lenguajeBasque">Baskijski</string>
+    <string name="txt_lenguajePolish">Polski</string>
+    <string name="txt_LenguajeChangeAlert">Czy na pewno chcesz zmienić język?</string>
+    <string name="txt_btnSave">Zapisz zmiany</string>
+
+    <!-- EXCEPTION -->
+    <string name="txt_EmailFormatError">E-mail ma nieprawidłowy format!</string>
+    <string name="txt_ErrorWrongPassword">Hasło jest nieprawidłowe!</string>
+    <string name="txt_IlogicalDate">Data jest nielogiczna!</string>
+    <string name="txt_NullField">Nie wypełniłeś wszystkich pól!</string>
+    <string name="txt_PasswordDoNotMatch">Hasła nie pasują!</string>
+    <string name="txt_PhoneFormatError">Format numeru telefonu jest nieprawidłowy!</string>
+    <string name="txt_UserAlreadyExists">Użytkownik już istnieje!</string>
+    <string name="txt_UserNotFound">Użytkownik nie istnieje!</string>
+
+    <!-- ERROR MSG -->
+    <string name="txt_LoginError">Błąd logowania!</string>
+    <string name="txt_Continue">Kontynuuj</string>
+    <string name="txt_TryAgain">Spróbuj ponownie!</string>
+    <string name="txt_Confirm">Potwierdź</string>
+    <string name="txt_RegisterCorrectAlert">Rejestracja zakończona sukcesem</string>
+    <string name="txt_RegisterCorrect">Użytkownik został pomyślnie utworzony!</string>
+    <string name="txt_RegisterErrorAlert">Błąd rejestracji</string>
+    <string name="txt_NeedToConfirmAlert">Wymagana jest potwierdzenie</string>
+    <string name="txt_LogOutAlert">Czy na pewno chcesz się wylogować?</string>
+    <string name="txt_YesAlert">Tak</string>
+    <string name="txt_NoAlert">Nie</string>
+    <string name="txt_PasswordCurrentSameNew">Nowe hasło nie może być takie samo jak obecne!</string>
+    <string name="txt_CurrentPasswordError">Obecne hasło jest nieprawidłowe!</string>
+
+</resources>

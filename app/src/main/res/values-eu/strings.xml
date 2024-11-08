@@ -1,2 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- LOGIN -->
+    <string name="app_name">JEM Fit</string>
+    <string name="txt_lblUser">Erabiltzailea</string>
+    <string name="txt_lblPassword">Pasahitza</string>
+    <string name="txt_cbRememberSesion">Saioa gogoratu</string>
+    <string name="txt_btnLogin">SAIOA HASI</string>
+    <string name="txt_lblInfoForRegister">Berria zara? Hemen erregistratu.</string>
+    <string name="txt_btnRegister">ERREGISTRATU</string>
+
+    <!-- REGISTER -->
+    <string name="txt_lblName">Izena</string>
+    <string name="txt_lblSurname">Abizena</string>
+    <string name="txt_lblPassword2">Pasahitza errepikatu</string>
+    <string name="txt_lblDate">Jaiotze data</string>
+    <string name="txt_lblEmail">Posta elektronikoa</string>
+    <string name="txt_lblPhone">Telefonoa</string>
+
+    <!-- WORKOUT -->
+    <string name="txt_lblWorkouts">ARIKETAK</string>
+    <string name="txt_lblWorkoutNumber">Ariketa kopurua: </string>
+    <string name="txt_columnName">Izena</string>
+    <string name="txt_columnCop">Ariketen kopurua</string>
+    <string name="txt_columnLvl">Maila</string>
+    <string name="txt_btnHistory">Historiala</string>
+
+    <!-- WORKOUT-INFO -->
+    <string name="txt_lblWorkoutInfo_Header">ARIKETA INFORMAZIOA</string>
+    <string name="txt_btnAtzera">Atzera</string>
+
+    <!-- PROFILE -->
+    <string name="txt_lblProfile">NIRE PROFILA</string>
+    <string name="txt_lblHello">Kaixo, </string>
+    <string name="txt_lblProfileInfo">! Hemen zure informazioa aldatu dezakezu.</string>
+    <string name="txt_btnPasswordChange">Pasahitza aldatu</string>
+    <string name="txt_lblCurrentPassword">Oraingo pasahitza</string>
+    <string name="txt_lblnewPassword">Pasahitz berria</string>
+    <string name="txt_lblnewPasswordRepeat">Pasahitz berria errepikatu</string>
+    <string name="txt_ClearTheme">Argia</string>
+    <string name="txt_DarkTheme">Iluna</string>
+    <string name="txt_lenguajeNone">Hizkuntza aukeratu</string>
+    <string name="txt_lenguajeSpanish">Gaztelania</string>
+    <string name="txt_lenguajeEnglish">Ingelesa</string>
+    <string name="txt_lenguajeBasque">Euskara</string>
+    <string name="txt_lenguajePolish">Polakoa</string>
+    <string name="txt_LenguajeChangeAlert">Ziur hizkuntza aldatu nahi duzula?</string>
+    <string name="txt_btnSave">Aldaketak gorde</string>
+
+    <!-- EXCEPTION -->
+    <string name="txt_EmailFormatError">Posta elektronikoa ez dago formatu egokian!</string>
+    <string name="txt_ErrorWrongPassword">Pasahitza ez da zuzena!</string>
+    <string name="txt_IlogicalDate">Data ez da logikoa!</string>
+    <string name="txt_NullField">Eremu guztiak bete ez dituzu!</string>
+    <string name="txt_PasswordDoNotMatch">Pasahitzak ez datoz bat!</string>
+    <string name="txt_PhoneFormatError">Telefono zenbakiaren formatua ez da zuzena!</string>
+    <string name="txt_UserAlreadyExists">Erabiltzailea dagoeneko existitzen da!</string>
+    <string name="txt_UserNotFound">Erabiltzailea ez da existitzen!</string>
+
+    <!-- ERROR MSG -->
+    <string name="txt_LoginError">Saioa hasteko errorea!</string>
+    <string name="txt_Continue">Jarraitu</string>
+    <string name="txt_TryAgain">Saiatu berriro!</string>
+    <string name="txt_Confirm">Berretsi</string>
+    <string name="txt_RegisterCorrectAlert">Erregistro zuzena</string>
+    <string name="txt_RegisterCorrect">Erabiltzailea ondo sortu da!</string>
+    <string name="txt_RegisterErrorAlert">Erregistro errorea</string>
+    <string name="txt_NeedToConfirmAlert">Berrespena behar da</string>
+    <string name="txt_LogOutAlert">Ziur saioa itxi nahi duzula?</string>
+    <string name="txt_YesAlert">Bai</string>
+    <string name="txt_NoAlert">Ez</string>
+    <string name="txt_PasswordCurrentSameNew">Pasahitz berria ezin da oraingo bera izan!</string>
+    <string name="txt_CurrentPasswordError">Oraingo pasahitza ez dator bat!</string>
+
+</resources>
