@@ -25,56 +25,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014"
         app:srcCompat="@android:drawable/ic_media_rew"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="153dp"
-        android:layout_height="38dp"
+        android:layout_width="211dp"
+        android:layout_height="40dp"
         android:text="@string/txt_lblWorkouts"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.037" />
 
     <TextView
         android:id="@+id/tvWorkoutsKopurua"
-        android:layout_width="228dp"
-        android:layout_height="29dp"
+        android:layout_width="270dp"
+        android:layout_height="30dp"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintHorizontal_bias="0.404"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.111" />
 
     <TextView
         android:id="@+id/tabl1"
-        android:layout_width="85dp"
-        android:layout_height="20dp"
+        android:layout_width="112dp"
+        android:layout_height="24dp"
         android:text="@string/txt_columnName"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.244" />
+        app:layout_constraintVertical_bias="0.24" />
 
     <TextView
         android:id="@+id/tvWorkout_columnCop"
-        android:layout_width="135dp"
-        android:layout_height="22dp"
+        android:layout_width="153dp"
+        android:layout_height="20dp"
         android:text="@string/txt_columnCop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +88,8 @@
 
     <TextView
         android:id="@+id/tvWorkout_columnLevel"
-        android:layout_width="80dp"
-        android:layout_height="21dp"
+        android:layout_width="98dp"
+        android:layout_height="24dp"
         android:text="@string/txt_columnLvl"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,7 +115,7 @@
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.234"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.037"
@@ -119,11 +123,11 @@
 
     <TextView
         android:id="@+id/tvWorkoutsLvl"
-        android:layout_width="56dp"
-        android:layout_height="24dp"
+        android:layout_width="72dp"
+        android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageButton"
         app:layout_constraintTop_toBottomOf="@+id/imageButton"
         app:layout_constraintVertical_bias="0.011" />

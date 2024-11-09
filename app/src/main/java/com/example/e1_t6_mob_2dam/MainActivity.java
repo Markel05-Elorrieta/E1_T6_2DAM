@@ -3,6 +3,7 @@ package com.example.e1_t6_mob_2dam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import Callback.UserCallBack;
 import Callback.WorkoutCallBack;
@@ -49,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /*-----------------------LENGUAGE-----------------------*/
-
+        SharedPreferences sharedPrefLen = getSharedPreferences("LenguajePref", Context.MODE_PRIVATE);
+        String lenguajeSaved = sharedPrefLen.getString("lenguajeKey","en");
+        Locale locale = new Locale(lenguajeSaved);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
 
         /*-----------------------CACHE-----------------------*/
         // Check if u have the session saved

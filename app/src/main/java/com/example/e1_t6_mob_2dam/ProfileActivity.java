@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -85,13 +86,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         /*-----------------------CHECK APP THEME AND PUT INFO-----------------------*/
         SharedPreferences prefTheme = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefTheme.edit();
+        SharedPreferences.Editor editorTheme = prefTheme.edit();
         boolean isNightMode = prefTheme.getBoolean("NightMode", false);
         if(isNightMode){
             sTheme.setChecked(true);
         }
 
-        /*-----------------------SPINNER LENGUAJE-----------------------*/
+        /*-----------------------LENGUAJE-----------------------*/
+        SharedPreferences prefLenguaje= getSharedPreferences("LenguajePref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorLenguaje = prefLenguaje.edit();
+
         String[] languages = {getString(R.string.txt_lenguajeNone), getString(R.string.txt_lenguajeEnglish), getString(R.string.txt_lenguajeSpanish), getString(R.string.txt_lenguajeBasque), getString(R.string.txt_lenguajePolish)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -104,45 +108,13 @@ public class ProfileActivity extends AppCompatActivity {
                 if (position == 0) {
                     return;
                 } else if (position == 1) {
-                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            GlobalVariables.lenguaje = "en";
-                            setLocale("en");
-                            mySpinner.setSelection(0);
-                            recreate();
-                        }
-                    });
+                    changeLenguaje(builder, mySpinner, "en", editorLenguaje);
                 } else if (position == 2) {
-                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            GlobalVariables.lenguaje = "es";
-                            setLocale("es");
-                            mySpinner.setSelection(0);
-                            recreate();
-                        }
-                    });
+                    changeLenguaje(builder, mySpinner, "es", editorLenguaje);
                 } else if (position == 3) {
-                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            GlobalVariables.lenguaje = "eu";
-                            setLocale("eu");
-                            mySpinner.setSelection(0);
-                            recreate();
-                        }
-                    });
+                    changeLenguaje(builder, mySpinner, "eu", editorLenguaje);
                 } else if (position == 4) {
-                    functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            GlobalVariables.lenguaje = "pl";
-                            setLocale("pl");
-                            mySpinner.setSelection(0);
-                            recreate();
-                        }
-                    });
+                    changeLenguaje(builder, mySpinner, "pl", editorLenguaje);
                 }
             }
 
@@ -203,14 +175,14 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor.putBoolean("NightMode", true);
+                    editorTheme.putBoolean("NightMode", true);
                     sTheme.setText(getString(R.string.txt_DarkTheme));
-                    editor.apply();
+                    editorTheme.apply();
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor.putBoolean("NightMode", false);
+                    editorTheme.putBoolean("NightMode", false);
                     sTheme.setText(getString((R.string.txt_ClearTheme)));
-                    editor.apply();
+                    editorTheme.apply();
                 }
             }
         });
@@ -246,6 +218,20 @@ public class ProfileActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+            }
+        });
+    }
+
+    private void changeLenguaje(AlertDialog.Builder builder, Spinner mySpinner, String newLenguaje, SharedPreferences.Editor editorLenguaje){
+        functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                GlobalVariables.lenguaje = newLenguaje;
+                setLocale(newLenguaje);
+                editorLenguaje.putString("lenguajeKey", newLenguaje);
+                editorLenguaje.apply();
+                mySpinner.setSelection(0);
+                recreate();
             }
         });
     }
