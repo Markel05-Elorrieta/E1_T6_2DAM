@@ -71,4 +71,6 @@
     <string name="txt_NoAlert">No</string>
     <string name="txt_PasswordCurrentSameNew">¡La nueva contraseña no puede ser la misma que la actual!</string>
     <string name="txt_CurrentPasswordError">¡La contraseña actual no coincide!</string>
+    <string name="txt_UpdateError">Error al Actualizar</string>
+    <string name="txt_GeneralError">Algo has puesto mal!</string>
 </resources>

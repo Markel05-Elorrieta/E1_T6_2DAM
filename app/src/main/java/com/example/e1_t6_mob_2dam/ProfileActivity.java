@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import dao.UserDao;
+import exceptions.IlogicalDate;
 import exceptions.NullField;
 import objects.User;
 
@@ -75,8 +76,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvErabiltzailea.setText(getString(R.string.txt_lblHello) + GlobalVariables.logedUser.getErabiltzailea() + getString(R.string.txt_lblProfileInfo));
         etNameIn.setText(GlobalVariables.logedUser.getIzena());
         etSurnameIn.setText(GlobalVariables.logedUser.getAbizenak());
-        String dateString = GlobalVariables.logedUser.getJaiotze_data().getDay() + "/" +
-                GlobalVariables.logedUser.getJaiotze_data().getMonth() + "/"
+        String dateString = GlobalVariables.logedUser.getJaiotze_data().getDate() + "/" +
+                (GlobalVariables.logedUser.getJaiotze_data().getMonth()+1) + "/"
                 + (GlobalVariables.logedUser.getJaiotze_data().getYear()+1900);
         etDateIn.setText(dateString);
         etEmailIn.setText(GlobalVariables.logedUser.getEmail());
@@ -103,41 +104,41 @@ public class ProfileActivity extends AppCompatActivity {
                 if (position == 0) {
                     return;
                 } else if (position == 1) {
-                    GlobalVariables.lenguaje = "en";
-                    setLocale("en");
                     functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            GlobalVariables.lenguaje = "en";
+                            setLocale("en");
                             mySpinner.setSelection(0);
                             recreate();
                         }
                     });
                 } else if (position == 2) {
-                    GlobalVariables.lenguaje = "es";
-                    setLocale("es");
                     functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            GlobalVariables.lenguaje = "es";
+                            setLocale("es");
                             mySpinner.setSelection(0);
                             recreate();
                         }
                     });
                 } else if (position == 3) {
-                    GlobalVariables.lenguaje = "eu";
-                    setLocale("eu");
                     functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            GlobalVariables.lenguaje = "eu";
+                            setLocale("eu");
                             mySpinner.setSelection(0);
                             recreate();
                         }
                     });
                 } else if (position == 4) {
-                    GlobalVariables.lenguaje = "pl";
-                    setLocale("pl");
                     functions.alertDisplayWithListener(builder, getString(R.string.txt_NeedToConfirmAlert), getString(R.string.txt_LenguajeChangeAlert), getString(R.string.txt_YesAlert), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            GlobalVariables.lenguaje = "pl";
+                            setLocale("pl");
                             mySpinner.setSelection(0);
                             recreate();
                         }
@@ -175,7 +176,7 @@ public class ProfileActivity extends AppCompatActivity {
                     if (nameIn.equals("") || surnameIn.equals("") || dateIn.equals("") || emailIn.equals("") || phoneIn.equals("")) {
                         throw new NullField();
                     }
-                    Date d = new Date(dateIn);
+                    Date d = functions.checkDate(dateIn);
                     User userUpdate = new User(nameIn, surnameIn, GlobalVariables.logedUser.getErabiltzailea(), GlobalVariables.logedUser.getPasahitza(),
                             d, emailIn, Integer.parseInt(phoneIn));
 
@@ -185,10 +186,9 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
 
-                } catch (NullField | NumberFormatException e) {
-                    functions.alertDisplay(builder, "Error", e.getMessage(), getString(R.string.txt_TryAgain));
+                } catch (NullField | IlogicalDate | NumberFormatException e) {
+                    functions.alertDisplay(builder, getString(R.string.txt_UpdateError), e.getMessage(), getString(R.string.txt_TryAgain));
                 }
-
             }
         });
 

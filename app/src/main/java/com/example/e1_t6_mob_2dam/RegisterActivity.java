@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import java.util.Date;
 import Callback.UserCallBack;
 import dao.UserDao;
 import exceptions.EmailFormatError;
+import exceptions.IlogicalDate;
 import exceptions.NullField;
 import exceptions.PasswordDoNotMatch;
 import exceptions.PhoneFormatError;
@@ -86,13 +88,14 @@ public class RegisterActivity extends AppCompatActivity {
                         public void userRetrieved(User userOut) {
                             // When u get the user from DB do this
                             try {
+
+
                                 // Check if u can register with the info user provide
                                 functions.checkRegister(userOut, txtPassword, txtPassword2, txtEmail, txtPhone);
-
+                                Date dateIn = functions.checkDate(txtDate);
                                 // If is here is because the info is correct and can register
                                 // Create an user to insert in DB
-                                Date d = new Date(txtDate);
-                                User userNew = new User(txtName, txtSurname, txtUser.toLowerCase(), txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
+                                User userNew = new User(txtName, txtSurname, txtUser.toLowerCase(), txtPassword, dateIn, txtEmail, Integer.parseInt(txtPhone));
                                 userDao.insertNewUser(userNew);
 
                                 // All done, show Alert saying is register
@@ -106,11 +109,13 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
                             } catch (PasswordDoNotMatch | UserAlreadyExists | EmailFormatError |
-                                     PhoneFormatError error) {
+                                     PhoneFormatError | IlogicalDate error) {
                                 // Alert display for errors
                                 functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), error.getMessage(), getString(R.string.txt_TryAgain));
                             } catch (NumberFormatException numberFormatException){
                                 functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), getString(R.string.txt_PhoneFormatError), getString(R.string.txt_TryAgain));
+                            } catch (IllegalArgumentException illegalArgumentException) {
+                                functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), getString(R.string.txt_IlogicalDate), getString(R.string.txt_TryAgain));
                             }
                         }
                     });

@@ -71,5 +71,7 @@
     <string name="txt_NoAlert">Nie</string>
     <string name="txt_PasswordCurrentSameNew">Nowe hasło nie może być takie samo jak obecne!</string>
     <string name="txt_CurrentPasswordError">Obecne hasło jest nieprawidłowe!</string>
+    <string name="txt_UpdateError">aktualizować błąd</string>
+    <string name="txt_GeneralError">Coś źle wpisałeś!</string>
 
 </resources>

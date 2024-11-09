@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnLogin.setEnabled(false);
+                btnRegister.setEnabled(false);
                 // Call DB to search user
                 userDao.searchUserDBByUser(userIn.getText().toString().toLowerCase(), new UserCallBack() {
                     @Override
@@ -92,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         } catch (ErrorWrongPassword | UserNotFound error) {
                             // Login txarto atera alerta bat
+                            btnLogin.setEnabled(true);
+                            btnRegister.setEnabled(true);
                             functions.alertDisplay(builder, getString(R.string.txt_LoginError), error.getMessage(), getString(R.string.txt_TryAgain));
                         }
                     }

@@ -72,5 +72,7 @@
     <string name="txt_NoAlert">No</string>
     <string name="txt_PasswordCurrentSameNew">The new password cannot be the same as the current one!</string>
     <string name="txt_CurrentPasswordError">The current password does not match!</string>
+    <string name="txt_UpdateError">Update Error</string>
+    <string name="txt_GeneralError">You have entered something wrong!</string>
 
 </resources>

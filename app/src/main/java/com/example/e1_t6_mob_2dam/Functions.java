@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.util.Log;
+import android.view.inputmethod.InsertGesture;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,10 +14,13 @@ import android.widget.TextView;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.IllegalFormatException;
 
 import dao.UserDao;
 import exceptions.EmailFormatError;
 import exceptions.ErrorWrongPassword;
+import exceptions.IlogicalDate;
 import exceptions.PasswordDoNotMatch;
 import exceptions.PhoneFormatError;
 import exceptions.UserAlreadyExists;
@@ -41,7 +46,6 @@ public class Functions {
     }
 
     public void checkRegister (User userDB, String passwordIn, String password2In, String emailIn, String phoneIn) throws PasswordDoNotMatch, UserAlreadyExists, EmailFormatError, PhoneFormatError, NumberFormatException {
-        /** Falta comprobar la fecha, telefono...**/
         if (userDB.getErabiltzailea() != null) {
             throw new UserAlreadyExists();
         }
@@ -53,6 +57,39 @@ public class Functions {
         } else if (!passwordIn.equals(password2In)){
             throw new PasswordDoNotMatch();
         }
+    }
+
+    public Date checkDate (String txtDate) throws IlogicalDate {
+        Log.d("fecharara", txtDate);
+        String[] dates = txtDate.split("/");
+        try {
+            if (dates[0].length() > 2 || dates[1].length() > 2 || dates[2].length() > 4) {
+                throw new IlogicalDate();
+            }
+
+            Date currentDate = new Date();
+            int day = Integer.parseInt(dates[0]);
+            int month = Integer.parseInt(dates[1]);
+            int year = Integer.parseInt(dates[2]);
+
+            Log.d("fecharara", day + "&" + month + "&" + year);
+            Log.d("fecharara", currentDate.getYear() + "");
+            if (day > 31 || month > 12 || year > (currentDate.getYear()+1900)) {
+                throw new IlogicalDate();
+            }
+            Date dateIn = new Date((year-1900), month-1, day);
+
+            Log.d("fecharara", dateIn.getDate() + "&" + dateIn.getMonth() + "&" + dateIn.getYear());
+
+            if (dateIn.after(currentDate)){
+                throw new IlogicalDate();
+            }
+
+            return dateIn;
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            throw new IlogicalDate();
+        }
+
     }
 
     public void alertDisplay(AlertDialog.Builder builder, String title, String msg, String msgBtn){
