@@ -41,6 +41,7 @@ import objects.User;
 public class ProfileActivity extends AppCompatActivity {
     private Functions functions = new Functions();
     private UserDao userDao = new UserDao();
+    private String newLenguaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,8 @@ public class ProfileActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(adapter);
+
+
 
         /*-----------------------DO WHEN CLICK LENGUAJE-----------------------*/
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -178,6 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
                     editorTheme.putBoolean("NightMode", true);
                     sTheme.setText(getString(R.string.txt_DarkTheme));
                     editorTheme.apply();
+
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editorTheme.putBoolean("NightMode", false);
@@ -227,11 +231,9 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 GlobalVariables.lenguaje = newLenguaje;
-                setLocale(newLenguaje);
-                editorLenguaje.putString("lenguajeKey", newLenguaje);
+                editorLenguaje.putString("lenguajeKey", GlobalVariables.lenguaje);
                 editorLenguaje.apply();
                 mySpinner.setSelection(0);
-                recreate();
             }
         });
     }

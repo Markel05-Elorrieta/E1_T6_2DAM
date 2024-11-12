@@ -45,7 +45,7 @@
     <string name="txt_lenguajeBasque">Basque</string>
     <string name="txt_lenguajePolish">Polish</string>
 
-    <string name="txt_LenguajeChangeAlert">Are you sure you want to change the lenguaje?</string>
+    <string name="txt_LenguajeChangeAlert">Are you sure you want to change the lenguaje? You will need to save and restart the application.</string>
     <string name="txt_btnSave">Save changes</string>
 
     <!-- EXCEPTION -->

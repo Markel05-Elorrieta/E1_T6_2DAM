@@ -44,7 +44,8 @@
     <string name="txt_lenguajeEnglish">Angielski</string>
     <string name="txt_lenguajeBasque">Baskijski</string>
     <string name="txt_lenguajePolish">Polski</string>
-    <string name="txt_LenguajeChangeAlert">Czy na pewno chcesz zmienić język?</string>
+
+    <string name="txt_LenguajeChangeAlert">Czy na pewno chcesz zmienić język? Będziesz musiał zapisać i ponownie uruchomić aplikację.</string>
     <string name="txt_btnSave">Zapisz zmiany</string>
 
     <!-- EXCEPTION -->

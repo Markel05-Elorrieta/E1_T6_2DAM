@@ -44,7 +44,8 @@
     <string name="txt_lenguajeEnglish">Ingelesa</string>
     <string name="txt_lenguajeBasque">Euskara</string>
     <string name="txt_lenguajePolish">Polakoa</string>
-    <string name="txt_LenguajeChangeAlert">Ziur hizkuntza aldatu nahi duzula?</string>
+
+    <string name="txt_LenguajeChangeAlert">Ziur hizkuntza aldatu nahi duzula? Aplikazioa gorde eta berrabiarazi beharko duzu.</string>
     <string name="txt_btnSave">Aldaketak gorde</string>
 
     <!-- EXCEPTION -->
