@@ -65,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnRegister.setEnabled(false);
                 // Get the text that user put
                 String txtName = nameIn.getText().toString();
                 String txtSurname = surnameIn.getText().toString();
@@ -112,16 +113,20 @@ public class RegisterActivity extends AppCompatActivity {
                                      PhoneFormatError | IlogicalDate error) {
                                 // Alert display for errors
                                 functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), error.getMessage(), getString(R.string.txt_TryAgain));
+                                btnRegister.setEnabled(true);
                             } catch (NumberFormatException numberFormatException){
                                 functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), getString(R.string.txt_PhoneFormatError), getString(R.string.txt_TryAgain));
+                                btnRegister.setEnabled(true);
                             } catch (IllegalArgumentException illegalArgumentException) {
                                 functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), getString(R.string.txt_IlogicalDate), getString(R.string.txt_TryAgain));
+                                btnRegister.setEnabled(true);
                             }
                         }
                     });
                 } catch (NullField | NumberFormatException error) {
                     // Alert display for errors
                     functions.alertDisplay(builder, getString(R.string.txt_RegisterErrorAlert), error.getMessage(), getString(R.string.txt_TryAgain));
+                    btnRegister.setEnabled(true);
                 }
             }
         });

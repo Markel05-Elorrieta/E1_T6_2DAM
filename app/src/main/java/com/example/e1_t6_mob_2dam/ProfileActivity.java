@@ -245,4 +245,13 @@ public class ProfileActivity extends AppCompatActivity {
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
+
+    /*-----------------------BACK MOBILE-----------------------*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ProfileActivity.this, WorkoutsActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

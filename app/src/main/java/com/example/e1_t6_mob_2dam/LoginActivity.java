@@ -27,8 +27,6 @@ import exceptions.UserNotFound;
 import objects.User;
 import objects.Workout;
 
-
-
 public class LoginActivity extends AppCompatActivity {
     private Functions functions = new Functions();
     private UserDao userDao = new UserDao();
