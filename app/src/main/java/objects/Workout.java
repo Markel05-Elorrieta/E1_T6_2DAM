@@ -3,6 +3,7 @@ package objects;
 import java.util.ArrayList;
 
 public class Workout {
+    private String id;
     private String izena;
     private int maila;
     private String videoURL;
@@ -11,11 +12,20 @@ public class Workout {
     public Workout() {
     }
 
-    public Workout(String izena, int maila, String videoURL, ArrayList<String> ariketakId) {
+    public Workout(String id,String izena, int maila, String videoURL, ArrayList<String> ariketakId) {
         this.izena = izena;
         this.maila = maila;
         this.videoURL = videoURL;
         this.ariketakId = ariketakId;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIzena() {
@@ -53,7 +63,8 @@ public class Workout {
     @Override
     public String toString() {
         return "Workout{" +
-                "izena='" + izena + '\'' +
+                "id='" + id + '\'' +
+                ", izena='" + izena + '\'' +
                 ", maila=" + maila +
                 ", videoURL='" + videoURL + '\'' +
                 ", ariketakId=" + ariketakId +

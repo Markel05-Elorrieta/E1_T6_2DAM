@@ -49,6 +49,7 @@ public class WorkoutInfoActivity extends AppCompatActivity {
         txtWorkoutMaila.setText(getString(R.string.txt_columnLvl) + " " + GlobalVariables.currentWorkout.getMaila());
         WebView wbYoutubeVideo = findViewById(R.id.web);
         RecyclerView rvAriketakList = findViewById(R.id.rvAriketak_list);
+
         Button btnAtzera = (Button) findViewById(R.id.btnWorkoutInfo_back);
 
         // Settings for the webview

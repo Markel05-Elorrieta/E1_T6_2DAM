@@ -34,6 +34,7 @@ public class WorkoutDao {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     if (document.getDouble("maila") <= GlobalVariables.logedUser.getMaila()) {
                         Workout workout = new Workout();
+                        workout.setId(document.getId());
                         workout.setIzena(document.getString("izena"));
                         workout.setMaila(document.getDouble("maila").intValue());
                         workout.setVideoURL(document.getString("video_url"));
