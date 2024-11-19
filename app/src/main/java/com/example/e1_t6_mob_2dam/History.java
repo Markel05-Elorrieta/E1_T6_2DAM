@@ -38,4 +38,13 @@ public class History extends AppCompatActivity {
             }
         });
     }
+
+    /*-----------------------BACK MOBILE-----------------------*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(History.this, WorkoutsActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -62,7 +62,6 @@ public class AdapterWorkoutList extends RecyclerView.Adapter<AdapterWorkoutList.
 
         // Set click listener for the item
         holder.itemView.setOnClickListener(view -> {
-            Log.d("Workout Clicked", "Workout clicked: " + currentWorkout.getIzena());
             AriketaDao ariketaDao = new AriketaDao();
 
             GlobalVariables.currentWorkout = currentWorkout;
@@ -74,7 +73,6 @@ public class AdapterWorkoutList extends RecyclerView.Adapter<AdapterWorkoutList.
                     GlobalVariables.ariketakDB = ariketak;
                     Intent intent = new Intent(context, WorkoutInfoActivity.class);
                     context.startActivity(intent);
-                    Log.d("sacararray", GlobalVariables.ariketakDB.size() + "");
                 }
             });
         });

@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         /*-----------------------LENGUAGE-----------------------*/
         SharedPreferences sharedPrefLen = getSharedPreferences("LenguajePref", Context.MODE_PRIVATE);
         String lenguajeSaved = sharedPrefLen.getString("lenguajeKey","en");
+        GlobalVariables.lenguaje = lenguajeSaved;
         Locale locale = new Locale(lenguajeSaved);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();

@@ -74,4 +74,5 @@
     <string name="txt_CurrentPasswordError">Oraingo pasahitza ez dator bat!</string>
     <string name="txt_UpdateError">Errorea eguneratzen</string>
     <string name="txt_GeneralError">Zerbait gaizki jarri duzu!</string>
+    <string name="txt_ComingSoon">Laster arte!</string>
 </resources>

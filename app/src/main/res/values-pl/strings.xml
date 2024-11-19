@@ -74,5 +74,6 @@
     <string name="txt_CurrentPasswordError">Obecne hasło jest nieprawidłowe!</string>
     <string name="txt_UpdateError">aktualizować błąd</string>
     <string name="txt_GeneralError">Coś źle wpisałeś!</string>
+    <string name="txt_ComingSoon">Już wkrótce</string>
 
 </resources>

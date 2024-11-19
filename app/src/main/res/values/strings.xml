@@ -74,5 +74,6 @@
     <string name="txt_CurrentPasswordError">The current password does not match!</string>
     <string name="txt_UpdateError">Update Error</string>
     <string name="txt_GeneralError">You have entered something wrong!</string>
+    <string name="txt_ComingSoon">Coming soon!</string>
 
 </resources>
